@@ -1,4 +1,4 @@
-package com.rhwayfun;
+package com.rhwayfun.mockito;
 
 import org.junit.Before;
 import org.junit.Test;
