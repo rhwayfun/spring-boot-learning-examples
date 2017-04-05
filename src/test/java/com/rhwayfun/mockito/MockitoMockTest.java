@@ -42,15 +42,17 @@ public class MockitoMockTest {
     }
 
     @Test
-    public void testArgsMatch(){
+    public void testArgsMatch() throws Exception{
         when(mockList.get(anyInt())).thenReturn("Hello Chubin");
-        when(mockList.contains(argThat(new Contains("Chubin")))).thenReturn(true);
-
-
         assertEquals(mockList.get(1), "Hello Chubin");
-        assertTrue(mockList.contains("Chubin"));
-
         verify(mockList).get(anyInt());
+    }
+
+    @Test
+    public void testArgsMatch2() throws Exception{
+        when(mockList.contains(argThat(new Contains("Chubin")))).thenReturn(true);
+        assertTrue(mockList.contains("Chubin"));
+        verify(mockList).contains(anyString());
     }
 
     @Test
