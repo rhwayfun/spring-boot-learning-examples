@@ -5,7 +5,6 @@ import com.rhwayfun.doamin.User;
 import com.rhwayfun.mockito.MainService;
 import com.rhwayfun.mockito.UserDAO;
 import com.rhwayfun.mockito.UserService;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +14,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
