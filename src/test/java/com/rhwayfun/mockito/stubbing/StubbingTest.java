@@ -2,15 +2,8 @@ package com.rhwayfun.mockito.stubbing;
 
 import com.google.common.collect.Lists;
 import com.rhwayfun.doamin.User;
-import com.rhwayfun.mockito.MainService;
-import com.rhwayfun.mockito.UserDAO;
-import com.rhwayfun.mockito.UserService;
-import org.junit.Before;
+import com.rhwayfun.mockito.BaseMockitoTest;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -19,21 +12,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by ZhongCB on 2017/4/5.
  */
-@RunWith(MockitoJUnitRunner.class)
-public class StubbingTest {
-
-    @InjectMocks
-    private UserService userService;
-    @Mock
-    private UserDAO userDAO;
-
-    @InjectMocks
-    private MainService mainService;
-
-    @Before
-    public void setUp(){
-        mainService.setUserService(userService);
-    }
+public class StubbingTest extends BaseMockitoTest {
 
     @Test
     public void stubTest1() throws Exception{

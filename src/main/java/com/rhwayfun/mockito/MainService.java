@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by ZhongCB on 2017/4/5.
@@ -26,6 +27,12 @@ public class MainService {
             log.error("occurs error:{}", userId, e);
             return null;
         }
+    }
+
+    public boolean modify(Integer id, String name, List hobbies){
+        boolean modify = userService.modifyUser(id, name, hobbies);
+        log.info("modify user--:{},name,hobbies:{}", id, name, hobbies);
+        return modify;
     }
 
     public void setUserService(UserService userService) {

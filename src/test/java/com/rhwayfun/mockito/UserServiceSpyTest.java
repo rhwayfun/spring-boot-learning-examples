@@ -58,6 +58,11 @@ public class UserServiceSpyTest {
         public boolean modifyUser(User user) {
             return false;
         }
+
+        @Override
+        public boolean modifyUser(Integer id, String name, List<String> hobbies) {
+            return false;
+        }
     }
 
 }

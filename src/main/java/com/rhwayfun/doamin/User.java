@@ -14,7 +14,15 @@ public class User {
     private int age;
     private List<String> hobbies;
 
-    public User(){}
+    public User() {
+
+    }
+
+    public User(Integer id, String name, List hobbies){
+        this.id = id;
+        this.name = name;
+        this.hobbies= hobbies;
+    }
 
     public User(String name, int id, int age, List<String> hobbies) {
         this.name = name;

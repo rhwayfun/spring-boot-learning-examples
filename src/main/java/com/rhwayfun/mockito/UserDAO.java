@@ -17,4 +17,5 @@ public interface UserDAO {
 
     boolean modifyUser(User user);
 
+    boolean modifyUser(Integer id, String name, List<String> hobbies);
 }

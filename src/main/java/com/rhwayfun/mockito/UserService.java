@@ -40,4 +40,8 @@ public class UserService {
         return userDAO.modifyUser(user);
     }
 
+    public boolean modifyUser(Integer id, String name, List<String> hobbies){
+        return userDAO.modifyUser(id, name, hobbies);
+    }
+
 }
