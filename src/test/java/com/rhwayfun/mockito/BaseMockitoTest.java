@@ -16,7 +16,7 @@ public class BaseMockitoTest {
     protected UserService userService;
 
     @Mock
-    private UserDAO userDAO;
+    protected UserDAO userDAO;
 
     @InjectMocks
     protected MainService mainService;

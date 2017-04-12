@@ -44,4 +44,7 @@ public class UserService {
         return userDAO.modifyUser(id, name, hobbies);
     }
 
+    public User findByName(String name) {
+        return userDAO.findByName(name);
+    }
 }

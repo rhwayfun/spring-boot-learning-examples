@@ -29,6 +29,15 @@ public class MainService {
         }
     }
 
+    public User getUser(String name){
+        try {
+            return userService.findByName(name);
+        } catch (Exception e){
+            log.error("occurs error:{}", name, e);
+            return null;
+        }
+    }
+
     public boolean modify(Integer id, String name, List hobbies){
         boolean modify = userService.modifyUser(id, name, hobbies);
         log.info("modify user--:{},name,hobbies:{}", id, name, hobbies);

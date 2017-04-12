@@ -5,9 +5,11 @@ import com.rhwayfun.mockito.BaseMockitoTest;
 import org.junit.Test;
 import org.testng.collections.Lists;
 
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyList;
-import static org.mockito.ArgumentMatchers.anyString;
+import java.util.List;
+
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -17,13 +19,10 @@ public class ArgsMatcherTest extends BaseMockitoTest {
 
     @Test
     public void argsTest1() throws Exception{
-        // mock data
         User user = new User("chubin",1, 24);
 
-        // stub
         when(mainService.getUser(anyInt())).thenReturn(user);
 
-        // result
         System.out.println(mainService.getUser(1));
     }
 
@@ -33,4 +32,25 @@ public class ArgsMatcherTest extends BaseMockitoTest {
 
         System.out.println(mainService.modify(1, "chubin", Lists.newArrayList("PingPangBall", "FootBall")));
     }
+
+    @Test
+    public void argsTest3() throws Exception{
+        List<String> mock = mock(List.class);
+
+        mock.add("hello");
+
+        verify(mock).add(argThat(str -> str.length() > 3));
+    }
+
+    @Test
+    public void argsTest4() throws Exception{
+        User user = new User("chubin",1, 24);
+
+        when(userDAO.findByName(eq("chubin"))).thenReturn(user);
+
+        System.out.println(userDAO.findByName("chubin"));
+
+        verify(userDAO).findByName(eq("chubin"));
+    }
+
 }
