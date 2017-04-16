@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -47,4 +48,5 @@ public class UserService {
     public User findByName(String name) {
         return userDAO.findByName(name);
     }
+
 }

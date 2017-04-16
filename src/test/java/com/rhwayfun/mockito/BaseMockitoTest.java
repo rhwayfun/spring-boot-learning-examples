@@ -10,7 +10,7 @@ import org.mockito.junit.MockitoJUnitRunner;
  * Created by chubin on 2017/4/9.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class BaseMockitoTest {
+public abstract class BaseMockitoTest {
 
     @InjectMocks
     protected UserService userService;

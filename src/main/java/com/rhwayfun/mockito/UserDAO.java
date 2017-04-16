@@ -2,6 +2,7 @@ package com.rhwayfun.mockito;
 
 import com.rhwayfun.doamin.User;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,4 +21,5 @@ public interface UserDAO {
     boolean modifyUser(Integer id, String name, List<String> hobbies);
 
     User findByName(String name);
+
 }

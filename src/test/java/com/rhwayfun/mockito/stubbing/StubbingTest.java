@@ -5,15 +5,13 @@ import com.rhwayfun.doamin.User;
 import com.rhwayfun.mockito.BaseMockitoTest;
 import org.junit.Test;
 import org.mockito.InOrder;
-import org.mockito.Mockito;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by ZhongCB on 2017/4/5.
@@ -99,4 +97,18 @@ public class StubbingTest extends BaseMockitoTest {
         // Oh, and A + B can be mixed together at will
     }
 
+    @Test
+    public void stubTest5() throws Exception{
+        List mockList = mock(List.class);
+
+        when(mockList.get(Integer.MAX_VALUE)).thenAnswer(invocation -> {
+            Object mock = invocation.getMock();
+            Object[] arguments = invocation.getArguments();
+            return new StringBuilder().append(mock).append(",").append(Arrays.asList(arguments)).toString();
+        });
+
+        System.out.println(mockList.get(Integer.MAX_VALUE));
+
+        verify(mockList).get(Integer.MAX_VALUE);
+    }
 }

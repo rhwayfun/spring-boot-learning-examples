@@ -2,11 +2,8 @@ package com.rhwayfun.mockito;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InOrder;
-import org.mockito.Mock;
 import org.mockito.internal.matchers.Contains;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
 import java.util.List;
