@@ -24,7 +24,8 @@
         <!-- 默认当队列剩余20%的容量时，只保留WARN以上级别的例子。设为0表示不丢失日志 -->
         <discardingThreshold>0</discardingThreshold>
         <!-- 默认队列大小是256 -->
-        <queueSize>512</queueSize>
+        <queueSize>102400</queueSize>
+        <nerverBlock>true</nerverBlock>
         <!-- AsyncAppender仅仅作为日志转发器，会由一个后台线程从阻塞队列读取日志 -->
         <appender-ref ref="INFO_FILE"/>
     </appender>
