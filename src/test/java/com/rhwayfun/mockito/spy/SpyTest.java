@@ -44,6 +44,8 @@ public class SpyTest extends BaseMockitoTest{
         List spy = spy(list);
 
         //optionally, you can stub out some methods:
+        //makes a real method call on the spy
+        //while doReturn not
         //when(spy.get(0)).thenReturn("Tim");
         doReturn("Tim").when(spy).get(0);
 

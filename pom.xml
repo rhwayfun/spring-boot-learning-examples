@@ -151,6 +151,12 @@
             <version>3.2.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.0.28</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
