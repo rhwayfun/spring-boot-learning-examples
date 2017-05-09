@@ -3,11 +3,16 @@ package com.rhwayfun.mockito.argsmatcher;
 import com.rhwayfun.doamin.User;
 import com.rhwayfun.mockito.BaseMockitoTest;
 import org.junit.Test;
+import org.mockito.ArgumentMatcher;
 import org.testng.collections.Lists;
 
+import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -51,6 +56,26 @@ public class ArgsMatcherTest extends BaseMockitoTest {
         System.out.println(userDAO.findByName("chubin"));
 
         verify(userDAO).findByName(eq("chubin"));
+    }
+
+    @Test
+    public void argsTest5(){
+        //创建mock对象
+        List<String> mock = mock(List.class);
+
+        //argThat(Matches<T> matcher)方法用来应用自定义的规则，可以传入任何实现Matcher接口的实现类。
+        when(mock.addAll(argThat(new IsValid()))).thenReturn(true);
+
+        mock.addAll(Arrays.asList("one","two"));
+        //IsListofTwoElements用来匹配size为2的List，因为例子传入List为三个元素，所以此时将失败。
+        verify(mock).addAll(argThat(new IsValid()));
+    }
+
+    private class IsValid implements ArgumentMatcher<List> {
+        @Override
+        public boolean matches(List argument) {
+            return argument.size() == 1;
+        }
     }
 
 }

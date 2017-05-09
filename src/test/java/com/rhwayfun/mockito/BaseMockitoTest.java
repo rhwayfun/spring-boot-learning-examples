@@ -9,7 +9,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 /**
  * Created by chubin on 2017/4/9.
  */
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.class) // 使用这个注解在使用@Mock注解创建的对象时不会NPE
 public abstract class BaseMockitoTest {
 
     @InjectMocks
