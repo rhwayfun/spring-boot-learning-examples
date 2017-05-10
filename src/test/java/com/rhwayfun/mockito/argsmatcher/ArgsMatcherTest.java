@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.mockito.ArgumentMatcher;
 import org.testng.collections.Lists;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
@@ -71,10 +72,10 @@ public class ArgsMatcherTest extends BaseMockitoTest {
         verify(mock).addAll(argThat(new IsValid()));
     }
 
-    private class IsValid implements ArgumentMatcher<List> {
+    class IsValid implements ArgumentMatcher<List> {
         @Override
         public boolean matches(List argument) {
-            return argument.size() == 1;
+            return argument.size() == 2;
         }
     }
 
