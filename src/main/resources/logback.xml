@@ -25,7 +25,7 @@
         <discardingThreshold>0</discardingThreshold>
         <!-- 默认队列大小是256 -->
         <queueSize>102400</queueSize>
-        <nerverBlock>true</nerverBlock>
+        <neverBlock>true</neverBlock>
         <!-- AsyncAppender仅仅作为日志转发器，会由一个后台线程从阻塞队列读取日志 -->
         <appender-ref ref="INFO_FILE"/>
     </appender>

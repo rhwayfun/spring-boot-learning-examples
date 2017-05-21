@@ -1,8 +1,6 @@
-package com.rhwayfun;
+package com.rhwayfun.springboot.mockito;
 
 import com.rhwayfun.springboot.doamin.User;
-import com.rhwayfun.springboot.mockito.UserDAO;
-import com.rhwayfun.springboot.mockito.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;

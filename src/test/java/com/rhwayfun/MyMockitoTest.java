@@ -4,8 +4,8 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static com.rhwayfun.mockito.Mockito.mock;
-import static com.rhwayfun.mockito.Mockito.when;
+import static com.rhwayfun.springboot.mockito.Mockito.mock;
+import static com.rhwayfun.springboot.mockito.Mockito.when;
 
 /**
  * Created by chubin on 2017/4/16.

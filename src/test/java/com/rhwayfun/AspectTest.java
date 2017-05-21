@@ -1,6 +1,6 @@
 package com.rhwayfun;
 
-import com.rhwayfun.aspect.StatsService;
+import com.rhwayfun.springboot.aspect.StatsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
