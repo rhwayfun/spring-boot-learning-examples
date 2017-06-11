@@ -10,9 +10,11 @@
     </appender>
 
     <appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>${LOG_PATH}/boot-demo.log</File>
+        <File>${logging.file.path:-/Users/chubin/logs}/springboot-learning-example.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/boot-demo.log.%d{yyyy-MM-dd-HH}</fileNamePattern>
+            <fileNamePattern>
+                ${logging.file.path:-/Users/chubin/logs}/springboot-learning-example.log.%d{yyyy-MM-dd-HH}
+            </fileNamePattern>
             <maxHistory>24</maxHistory>
         </rollingPolicy>
         <layout class="ch.qos.logback.classic.PatternLayout">
@@ -34,9 +36,11 @@
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>ERROR</level>
         </filter>
-        <File>${LOG_PATH}/error.log</File>
+        <File>${logging.file.path:-/Users/chubin/logs}/error.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/error.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <fileNamePattern>
+                ${logging.file.path:-/Users/chubin/logs}/error.log.%d{yyyy-MM-dd}
+            </fileNamePattern>
             <maxHistory>7</maxHistory>
         </rollingPolicy>
         <layout class="ch.qos.logback.classic.PatternLayout">

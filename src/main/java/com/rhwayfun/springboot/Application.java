@@ -20,6 +20,7 @@ public class Application implements EmbeddedServletContainerCustomizer {
 
 	public static void main(String[] args) {
 		try {
+			System.setProperty("server.port", String.valueOf(9999));
 			SpringApplication.run(Application.class, args);
 			log.info("Application start success.");
 		} catch (Exception e) {
