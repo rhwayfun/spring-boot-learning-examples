@@ -20,4 +20,4 @@ out/
 .DS_Store
 
 # Disconf
-disconf/
+/disconf/
