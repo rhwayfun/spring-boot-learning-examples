@@ -7,15 +7,7 @@ import com.baidu.disconf.client.common.update.IDisconfUpdatePipeline;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
-import org.springframework.core.env.ConfigurableEnvironment;
-import org.springframework.core.env.PropertiesPropertySource;
-import org.springframework.core.env.PropertySource;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by chubin on 2017/6/11.
@@ -28,30 +20,6 @@ public class PropertyUpdateCallBackV2 implements IDisconfUpdatePipeline {
 
     /** Logger */
     private static Logger log = LoggerFactory.getLogger(PropertyUpdateCallBackV2.class);
-
-    private Map<String, Object> PARAM = new HashMap<>();
-
-    @Resource
-    private ConfigurableEnvironment env;
-
-    @PostConstruct
-    public void init() throws Exception {
-        reload();
-    }
-
-    private void reload() {
-        Map<String, Object> cacheMap = new HashMap<>();
-        PropertySource<?> propertySource = env.getPropertySources().get("springboot-demo");
-        if (propertySource instanceof PropertiesPropertySource) {
-            PropertiesPropertySource propertiesPropertySource = (PropertiesPropertySource) propertySource;
-            Map<String, Object> objectMap = propertiesPropertySource.getSource();
-            for (Map.Entry<String, Object> e : objectMap.entrySet()) {
-                log.info("设置环境>>>>key:{},value:{}", e.getKey(), e.getValue());
-                cacheMap.put(e.getKey(), e.getValue());
-            }
-        }
-        PARAM = cacheMap;
-    }
 
     private boolean openTest;
 
@@ -99,8 +67,6 @@ public class PropertyUpdateCallBackV2 implements IDisconfUpdatePipeline {
     public void reloadDisconfFile(String key, String filePath) throws Exception {
         if ("common.properties".equals(key)) {
             log.info("{},{}>>>>>>>>>>>配置更新：{}", key, filePath, this);
-            log.info("map:{}", PARAM);
-            reload();
         }
     }
 

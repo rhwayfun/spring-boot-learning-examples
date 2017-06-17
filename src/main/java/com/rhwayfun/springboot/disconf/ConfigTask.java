@@ -9,21 +9,21 @@ import javax.annotation.Resource;
  * Created by chubin on 2017/6/11.
  */
 @Service
-public class RedisConfigTask {
+public class ConfigTask {
 
     @Resource
-    private JedisConfig jedisConfig;
+    private PropertyUpdateCallBackV3 propertyUpdateCallBackV3;
 
     @PostConstruct
     public void execute() throws Exception{
-        /*new Thread(new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true) {
-                    System.out.println("host:" + jedisConfig.getHost() +"port:" + jedisConfig.getPort());
+                    System.out.println("factor:" + propertyUpdateCallBackV3.getCalcFactorV2());
                 }
             }
-        }).start();*/
+        }).start();
     }
 
 }

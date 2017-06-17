@@ -1,3 +1,4 @@
+/*
 package com.rhwayfun.springboot.disconf;
 
 import com.baidu.disconf.client.common.annotations.DisconfFile;
@@ -9,16 +10,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by chubin on 2017/6/11.
- */
 @Service
 @Scope("singleton")
 @DisconfFile(filename = "app.properties")
 @DisconfUpdateService(classes = {AppConfig.class})
 public class AppConfig implements IDisconfUpdate {
 
-    /** Logger */
     private static Logger log = LoggerFactory.getLogger(AppConfig.class);
 
     private String env;
@@ -92,3 +89,4 @@ public class AppConfig implements IDisconfUpdate {
         log.info("app.properties>>>>>>>配置更新");
     }
 }
+*/
