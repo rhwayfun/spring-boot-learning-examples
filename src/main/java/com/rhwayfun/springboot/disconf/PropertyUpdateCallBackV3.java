@@ -1,6 +1,7 @@
 package com.rhwayfun.springboot.disconf;
 
 import com.baidu.disconf.client.common.update.IDisconfUpdatePipeline;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.ConfigurableEnvironment;
@@ -88,15 +89,11 @@ public class PropertyUpdateCallBackV3 implements IDisconfUpdatePipeline {
     }
 
     private int getIntDefault(String key) {
-        return Integer.parseInt(getValue(key));
+        return Integer.parseInt(StringUtils.isBlank(getValue(key)) ? "-1" : getValue(key));
     }
 
     private String getValue(String key) {
-        return String.valueOf(PARAM.get(key) == null ? "" : PARAM.get(key));
-    }
-
-    public static void main(String[] args) {
-        System.out.println(Integer.parseInt(""));
+        return String.valueOf(PARAM.get(key));
     }
 
 }
