@@ -18,7 +18,7 @@
           class="com.baidu.disconf.client.addons.properties.ReloadablePropertiesFactoryBean">
         <property name="locations">
             <list>
-                <value>classpath*:app.properties</value>
+                <value>classpath:app.properties</value>
             </list>
         </property>
     </bean>
