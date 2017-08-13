@@ -6,9 +6,12 @@ import com.rhwayfun.springboot.controller.rest.MyRestResponse;
 import com.rhwayfun.springboot.doamin.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,11 +26,19 @@ public class WelcomeController {
     @Value("${application.message:Hello World}")
     private String message = "Hello World";
 
-    @RequestMapping("/")
+    @RequestMapping(value = {"/", "/index"})
     public String welcome(Map<String, Object> model) {
         model.put("time", new Date());
         model.put("message", this.message);
         return "welcome";
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @RequestMapping("/admin")
+    public @ResponseBody String admin(Model model) {
+        model.addAttribute("time", LocalDateTime.now());
+        model.addAttribute("msg", "admin用户才有权限哦");
+        return model.toString();
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)

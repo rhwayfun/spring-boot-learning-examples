@@ -6,6 +6,8 @@ package com.rhwayfun.springboot.datasource.constants;
 public abstract class DataSourceConstants {
 
     public static final String MAPPER_PACKAGE = "com.rhwayfun.springboot.datasource";
-    public static final String MAPPER_LOCATION = "classpath:mapper/*.xml";
+    public static final String MAPPER_SECURITY_PACKAGE = "com.rhwayfun.springboot.security.datasource";
+    public static final String MAPPER_LOCATION = "classpath:mapper/mybatis/*.xml";
+    public static final String MAPPER_SECURITY_LOCATION = "classpath:mapper/security/*.xml";
 
 }
