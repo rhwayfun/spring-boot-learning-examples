@@ -54,6 +54,11 @@ public class PropertyUpdateCallBack implements IDisconfUpdate {
         this.appName = appName;
     }
 
+    /**
+     * 每次更新分布式配置都会调reload方法
+     *
+     * @throws Exception
+     */
     @Override
     public void reload() throws Exception {
         log.info("common.properties>>>>>>>>>>>配置更新：{}", this);

@@ -2,10 +2,11 @@
  * Created by chubin on 2017/2/12.
  */
 
-/*$(document).ready(function(){
-    alert("Welcome");
-});*/
+$(document).ready(function(){
+    window.location.href("home.jsp")
+});
 
+/*
 function yes() {
     var body = "";
     var users = $('#users');
@@ -28,4 +29,4 @@ function yes() {
             users.html(body);
         }
     });
-}
+}*/
