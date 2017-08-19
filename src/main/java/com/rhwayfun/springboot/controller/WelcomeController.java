@@ -30,7 +30,7 @@ public class WelcomeController {
     public String welcome(Map<String, Object> model) {
         model.put("time", new Date());
         model.put("message", this.message);
-        return "welcome";
+        return "home";
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")

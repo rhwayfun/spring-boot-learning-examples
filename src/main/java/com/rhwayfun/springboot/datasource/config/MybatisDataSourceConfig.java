@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
@@ -31,6 +32,7 @@ public class MybatisDataSourceConfig {
     private String driverClassName;
 
     @Bean(name = "mybatisDataSource")
+    @Primary
     public DataSource mybatisDataSource() {
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setDriverClassName(driverClassName);
@@ -41,11 +43,13 @@ public class MybatisDataSourceConfig {
     }
 
     @Bean(name = "mybatisTransactionManager")
+    @Primary
     public DataSourceTransactionManager mybatisTransactionManager() {
         return new DataSourceTransactionManager(mybatisDataSource());
     }
 
     @Bean(name = "mybatisSqlSessionFactory")
+    @Primary
     public SqlSessionFactory mybatisSqlSessionFactory(@Qualifier("mybatisDataSource") DataSource mybatisDataSource)
             throws Exception {
         final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();

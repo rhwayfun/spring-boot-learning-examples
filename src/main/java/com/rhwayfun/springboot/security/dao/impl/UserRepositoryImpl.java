@@ -1,6 +1,6 @@
-package com.rhwayfun.springboot.security.datasource.dao.impl;
+package com.rhwayfun.springboot.security.dao.impl;
 
-import com.rhwayfun.springboot.security.datasource.dao.UserRepository;
+import com.rhwayfun.springboot.security.dao.UserRepository;
 import com.rhwayfun.springboot.security.datasource.mapper.UserAuthorityMapper;
 import com.rhwayfun.springboot.security.datasource.mapper.UserMapper;
 import com.rhwayfun.springboot.security.datasource.model.User;

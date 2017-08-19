@@ -1,4 +1,4 @@
-package com.rhwayfun.springboot.security.datasource.domain;
+package com.rhwayfun.springboot.security.domain;
 
 import com.rhwayfun.springboot.security.datasource.model.User;
 import com.rhwayfun.springboot.security.datasource.model.UserAuthority;

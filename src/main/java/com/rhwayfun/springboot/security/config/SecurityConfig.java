@@ -1,10 +1,11 @@
-package com.rhwayfun.springboot.security;
+package com.rhwayfun.springboot.security.config;
 
-import com.rhwayfun.springboot.security.datasource.service.CustomUserDetailsService;
+import com.rhwayfun.springboot.security.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -12,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * Created by chubin on 2017/8/13.
  */
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
@@ -35,10 +37,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
+                .defaultSuccessUrl("/index")
                 .permitAll()
                 .and()
                 .logout()
+                .logoutSuccessUrl("/login")
                 .permitAll();//定义logout不需要验证
+
+        http.csrf().disable();
     }
 
 }

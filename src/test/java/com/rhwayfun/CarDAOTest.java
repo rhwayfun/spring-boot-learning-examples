@@ -1,10 +1,13 @@
 package com.rhwayfun;
 
+import com.alibaba.fastjson.JSON;
 import com.rhwayfun.springboot.Application;
 import com.rhwayfun.springboot.datasource.dao.CarDAO;
 import com.rhwayfun.springboot.datasource.mapper.CarMapper;
 import com.rhwayfun.springboot.datasource.model.Car;
 import com.rhwayfun.springboot.doamin.CarBO;
+import com.rhwayfun.springboot.security.datasource.mapper.UserMapper;
+import com.rhwayfun.springboot.security.datasource.model.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,6 +30,9 @@ public class CarDAOTest {
     @Resource
     private CarMapper carMapper;
 
+    @Resource
+    private UserMapper userMapper;
+
     @Test
     public void save() throws Exception {
         CarBO car = new CarBO( null, "DD-AB-123", 4 );
@@ -40,6 +46,12 @@ public class CarDAOTest {
         record.setManuFacturer("test");
         record.setSeatCount(2);
         carMapper.insert(record);
+    }
+
+    @Test
+    public void findUser() throws Exception {
+        User user = userMapper.selectByPrimaryKey(1);
+        System.out.println(JSON.toJSON(user));
     }
 
 }

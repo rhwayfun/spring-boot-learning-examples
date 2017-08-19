@@ -1,9 +1,11 @@
-package com.rhwayfun.springboot.security.datasource.service;
+package com.rhwayfun.springboot.security.service;
 
-import com.rhwayfun.springboot.security.datasource.dao.UserRepository;
+import com.rhwayfun.springboot.security.dao.UserRepository;
 import com.rhwayfun.springboot.security.datasource.model.User;
 import com.rhwayfun.springboot.security.datasource.model.UserAuthority;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,6 +22,9 @@ import java.util.List;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
+    /** Logger */
+    private static Logger log = LoggerFactory.getLogger(CustomUserDetailsService.class);
+
     @Resource
     private UserRepository userRepository;
 
@@ -28,7 +33,13 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (StringUtils.isBlank(username)) {
             throw new IllegalArgumentException("username can't be null!");
         }
-        User user = userRepository.findByUserName(username);
+        User user;
+        try {
+            user = userRepository.findByUserName(username);
+        } catch (Exception e) {
+            log.error("读取用户信息异常，", e);
+            return null;
+        }
         if (user == null) {
             return null;
         }

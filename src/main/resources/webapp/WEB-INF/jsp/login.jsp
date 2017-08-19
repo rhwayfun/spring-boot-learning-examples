@@ -12,15 +12,22 @@
 </head>
 <body>
 
-<form>
-    <input id="name" name="name" type="text"/><br>
-    <input id="age" name="age" type="text"><br>
-    <input type="button" value="yes" onclick="yes()">
+<form name="f" action="/login" method="post">
+    <input id="name" name="username" type="text"/><br>
+    <input id="password" name="password" type="password"><br>
+    <input type="submit" value="login">
+    <input name="_csrf" type="hidden" value="${_csrf}"/>
 </form>
 
 <p id="users">
 
 </p>
+
+<script>
+    $(function () {
+        $('[name=f]').focus()
+    })
+</script>
 </body>
 
 </html>
