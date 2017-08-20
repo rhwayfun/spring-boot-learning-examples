@@ -87,7 +87,7 @@ public class StubbingTest extends BaseMockitoTest {
         firstMock.add("was called first");
         secondMock.add("was called second");
 
-        //create inOrder object passing any mocks that need to be verified in order
+        //create inOrder memory passing any mocks that need to be verified in order
         inOrder = inOrder(firstMock, secondMock);
 
         //following will make sure that firstMock was called before secondMock
