@@ -41,7 +41,7 @@ public class SpringScheduledTaskExample {
         }
     }
 
-    @Scheduled(cron = "3/10 * * * * ?")
+    //@Scheduled(cron = "3/10 * * * * ?")
     public void execute() throws InterruptedException {
         log.info("check schedule task!");
         for (int i = 0; i < 5; i++) {
@@ -52,7 +52,7 @@ public class SpringScheduledTaskExample {
         Thread.sleep(ThreadLocalRandom.current().nextInt(10000));
     }
 
-    @Scheduled(cron = "0/20 * * * * ?")
+    //@Scheduled(cron = "0/20 * * * * ?")
     public void execute2() throws InterruptedException {
         log.info("check schedule task2!");
         for (int i = 0; i < 5; i++) {

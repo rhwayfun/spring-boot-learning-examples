@@ -6,7 +6,7 @@ import org.springframework.retry.annotation.Retryable;
 /**
  * Created by chubin on 2017/8/27.
  */
-public class RetryService {
+public class RetryTestService {
 
     @Retryable(IllegalArgumentException.class)
     public int calc(int len) throws Exception {

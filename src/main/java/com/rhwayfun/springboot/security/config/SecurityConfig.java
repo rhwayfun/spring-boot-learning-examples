@@ -23,10 +23,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        /*auth.inMemoryAuthentication().withUser("rhwayfun").password("1209").roles("USERS")
-                .and().withUser("admin").password("123456").roles("ADMIN");*/
+        auth.inMemoryAuthentication().withUser("rhwayfun").password("1209").roles("USERS")
+                .and().withUser("admin").password("123456").roles("ADMIN");
         //auth.jdbcAuthentication().dataSource(securityDataSource);
-        auth.userDetailsService(userDetailsService());
+        //auth.userDetailsService(userDetailsService());
     }
 
     @Override

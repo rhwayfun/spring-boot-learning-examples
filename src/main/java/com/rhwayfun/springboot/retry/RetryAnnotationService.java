@@ -38,7 +38,7 @@ public class RetryAnnotationService {
         return "ArithmeticException recover";
     }
 
-    @CircuitBreaker(include = IllegalArgumentException.class, maxAttempts = 3, openTimeout = 3000, resetTimeout = 10000)
+    @CircuitBreaker(include = IllegalArgumentException.class, maxAttempts = 1, openTimeout = 5000, resetTimeout = 10000)
     public String service2() {
         log.info("service2 open CircuitBreaker");
         throw new IllegalArgumentException();

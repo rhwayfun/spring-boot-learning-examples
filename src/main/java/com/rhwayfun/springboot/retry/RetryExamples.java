@@ -8,6 +8,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.TypeMismatchDataAccessException;
 import org.springframework.retry.*;
 import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.retry.backoff.FixedBackOffPolicy;
@@ -20,7 +21,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.IllformedLocaleException;
 import java.util.Map;
 
 /**
@@ -35,8 +35,8 @@ public class RetryExamples {
     private static Logger log = LoggerFactory.getLogger(RetryExamples.class);
 
     @Bean
-    public RetryService retryService() {
-        return new RetryService();
+    public RetryTestService retryTestService() {
+        return new RetryTestService();
     }
 
     @Bean
@@ -46,9 +46,9 @@ public class RetryExamples {
 
     private int len = 3;
 
-    private static final int TYPE = 6;
+    private static final int TYPE = 1;
 
-    @Scheduled(fixedDelay = 1000 * 30)
+    @Scheduled(fixedDelay = 1000 * 60 * 60)
     public void retry() throws Exception {
         switch (TYPE) {
             case 1:
@@ -96,7 +96,7 @@ public class RetryExamples {
     private void retryExample1() {
         int calc = 0;
         try {
-            calc = retryService().calc(len++);
+            calc = retryTestService().calc(len++);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -231,7 +231,7 @@ public class RetryExamples {
         TimeoutRetryPolicy timeoutRetryPolicy = new TimeoutRetryPolicy();
         timeoutRetryPolicy.setTimeout(10L);
 
-        // 如果重试总耗时超过1s，重试次数不超过3次，重试中止；如果总耗时未超过1s，但是重试次数超过3次，重试中止
+        // 如果重试总耗时超过1s，或重试次数超过3次，重试中止；如果总耗时未超过1s，但是重试次数超过3次，重试中止
         compositeRetryPolicy.setPolicies(new RetryPolicy[]{
                 simpleRetryPolicy,
                 timeoutRetryPolicy,
@@ -307,8 +307,8 @@ public class RetryExamples {
             @Override
             public String doWithRetry(RetryContext context) throws RuntimeException {
                 System.out.println("retry count:" + context.getRetryCount());
-                //throw new TypeMismatchDataAccessException("");
-                throw new IllformedLocaleException("");
+                throw new TypeMismatchDataAccessException("");
+                //throw new IllformedLocaleException("");
             }
         }, new RecoveryCallback<String>() {
             @Override
@@ -323,21 +323,23 @@ public class RetryExamples {
     private void retryExample9() throws Exception {
         RetryTemplate template = new RetryTemplate();
         CircuitBreakerRetryPolicy retryPolicy =
-                new CircuitBreakerRetryPolicy(new SimpleRetryPolicy(3));
-        retryPolicy.setOpenTimeout(5000);
-        retryPolicy.setResetTimeout(20000);
+                new CircuitBreakerRetryPolicy(new SimpleRetryPolicy(1));
+        retryPolicy.setOpenTimeout(20000);
+        retryPolicy.setResetTimeout(1);
         template.setRetryPolicy(retryPolicy);
 
         for (int i = 0; i < 10; i++) {
-            //Thread.sleep(100);
+            //Thread.sleep(1000);
+            //log.info("index: {}", i);
             try {
                 Object key = "circuit";
                 boolean isForceRefresh = false;
                 RetryState state = new DefaultRetryState(key, isForceRefresh);
+                int finalI = i;
                 String result = template.execute(new RetryCallback<String, RuntimeException>() {
                     @Override
                     public String doWithRetry(RetryContext context) throws RuntimeException {
-                        log.info("retry count: {}", context.getRetryCount());
+                        log.info("index:{}, retry count: {}", finalI, context.getRetryCount());
                         throw new RuntimeException("timeout");
                     }
                 }, new RecoveryCallback<String>() {
@@ -346,7 +348,7 @@ public class RetryExamples {
                         return "default";
                     }
                 }, state);
-                log.info("result: {}", result);
+                System.out.println(result);
             } catch (Exception e) {
                 System.out.println(e);
             }
