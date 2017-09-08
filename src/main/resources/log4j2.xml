@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" strict="true">
+
+    <Properties>
+        <!-- 本地开发时这个路径替换成自己的本地路径 -->
+        <Property name="local.logging.path">C:/logs</Property>
+        <Property name="project.name">springboot-learning-example</Property>
+
+        <Property name="logging.file.path">${local.logging.path}/${project.name}</Property>
+        <Property name="logging.file.name">${sys:logging.file.path}/${project.name}.log</Property>
+        <Property name="logging.file.warn.name">${sys:logging.file.path}/${project.name}-warn.log</Property>
+        <Property name="logging.file.error.name">${sys:logging.file.path}/${project.name}-error.log</Property>
+
+        <Property name="layout">%d %p [%t] %c{10}:%M:%L %m%n</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${layout}"/>
+        </Console>
+
+        <RollingRandomAccessFile name="RollingRandomAccessFile"
+                                 immediateFlush="true" fileName="${logging.file.name}"
+                                 filePattern="${logging.file.name}-%d{yyyy-MM-dd-HH}">
+            <PatternLayout pattern="${layout}"/>
+            <ThresholdFilter level="debug"/>
+            <TimeBasedTriggeringPolicy/>
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="RollingRandomAccessFileWarn"
+                                 immediateFlush="true" fileName="${logging.file.warn.name}"
+                                 filePattern="${logging.file.warn.name}-%d{yyyy-MM-dd}">
+            <PatternLayout pattern="${layout}"/>
+            <ThresholdFilter level="warn"/>
+            <TimeBasedTriggeringPolicy/>
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="RollingRandomAccessFileError"
+                                 immediateFlush="true" fileName="${logging.file.error.name}"
+                                 filePattern="${logging.file.error.name}-%d{yyyy-MM-dd}">
+            <PatternLayout pattern="${layout}"/>
+            <ThresholdFilter level="error"/>
+            <TimeBasedTriggeringPolicy/>
+        </RollingRandomAccessFile>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com.alibaba.druid" level="warn"/>
+
+        <Logger name="org.springframework" level="info"/>
+
+        <Logger name="org.springframework.retry" level="trace"/>
+
+        <Logger name="org.apache" level="warn"/>
+
+        <Logger name="org.mybatis.spring" level="warn"/>
+
+        <Logger name="org.mybatis.spring.SqlSessionUtils" level="info"/>
+
+        <Logger name="com.alibaba" level="warn"/>
+
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingRandomAccessFile"/>
+            <AppenderRef ref="RollingRandomAccessFileWarn"/>
+            <AppenderRef ref="RollingRandomAccessFileError"/>
+        </Root>
+
+    </Loggers>
+</Configuration>
