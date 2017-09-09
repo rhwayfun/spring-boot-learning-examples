@@ -6,7 +6,33 @@
     <groupId>com.rhwayfun</groupId>
     <artifactId>spring-boot-learning-examples</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <modules>
+        <module>spring-boot-quickstart</module>
+        <module>spring-boot-mybatis</module>
+        <module>spring-boot-dubbo</module>
+        <module>spring-boot-rocketmq</module>
+        <module>spring-boot-retry</module>
+        <module>spring-boot-security</module>
+        <module>spring-boot-cache-caffeine</module>
+        <module>spring-boot-configuration</module>
+        <module>spring-boot-aspect</module>
+        <module>spring-boot-disconf</module>
+        <module>spring-boot-task</module>
+        <module>spring-boot-kafka</module>
+        <module>spring-boot-redis</module>
+        <module>spring-boot-mockito</module>
+        <module>spring-boot-elasticsearch</module>
+        <module>spring-boot-mybatis-multidatasource</module>
+        <module>spring-boot-hibernate-validation</module>
+        <module>spring-boot-web-jsp</module>
+        <module>spring-boot-web-thymeleaf</module>
+        <module>spring-boot-web-bootstrap</module>
+        <module>spring-boot-geode</module>
+        <module>spring-boot-mybatis-sharding-jdbc</module>
+        <module>spring-boot-elastic-job</module>
+        <module>spring-boot-security-cas</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
