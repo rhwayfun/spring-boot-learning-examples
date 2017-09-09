@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.rhwayfun</groupId>
-    <artifactId>springboot-learning-example</artifactId>
+    <artifactId>spring-boot-learning-examples</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
