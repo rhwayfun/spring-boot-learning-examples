@@ -30,8 +30,9 @@ Github地址：https://github.com/happyxiaofan
     
 
 3. 数据存储：缓存
-* spring-boot-cache-caffeine
-* spring-boot-redis
+* spring-boot-cache-caffeine（高性能本地缓存框架caffeine实践）
+* spring-boot-cache-ehcache（Java应用最多的本地缓存Ehcache实践）
+* spring-boot-redis（分布式KV缓存redis实践）
 
 4. 数据库
 * spring-boot-mybatis（mybatis使用快速入门）
@@ -54,6 +55,8 @@ Github地址：https://github.com/happyxiaofan
 
 5. 企业开发进阶
 * spring-boot-dubbo（服务治理框架dubbo使用案例）
+* spring-boot-dubbo-annotation（服务治理框架dubbo案例，基于注解实现）
+* spring-boot-dubbo-extension（基于duboo扩展点实现自定义扩展）
 * spring-boot-disconf（分布式配置管理disconf使用案例）
 * spring-boot-elasticsearch（全文搜索引擎elasticsearch实践）
 * spring-boot-kafka（消息中间件kafka实践）

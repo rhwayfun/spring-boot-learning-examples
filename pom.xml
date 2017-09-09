@@ -31,6 +31,9 @@
         <module>spring-boot-mybatis-sharding-jdbc</module>
         <module>spring-boot-elastic-job</module>
         <module>spring-boot-security-cas</module>
+        <module>spring-boot-dubbo-annotation</module>
+        <module>spring-boot-dubbo-extension</module>
+        <module>spring-boot-cache-ehcache</module>
     </modules>
     <packaging>pom</packaging>
 
