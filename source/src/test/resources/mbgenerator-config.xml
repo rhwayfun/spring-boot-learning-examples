@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<!-- mvn -Dmybatis.generator.configurationFile=src/test/resources/mbgenerator-config.xml -Dmybatis.generator.overwrite=true mybatis-generator:generate -->
+<generatorConfiguration>
+    <classPathEntry location="/Users/chubin/.m2/repository/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar" />
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/security?characterEncoding=utf8"
+                        userId="root"
+                        password="1209">
+        </jdbcConnection>
+
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.rhwayfun.springboot.security.datasource.model" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapper"  targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.rhwayfun.springboot.security.datasource.mapper"  targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!--<table schema="mybatis" tableName="car" domainObjectName="Car"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+        </table>-->
+
+        <table schema="security" tableName="g_users" domainObjectName="User"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+        </table>
+
+        <table schema="security" tableName="g_authority" domainObjectName="Authority"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+        </table>
+
+        <table schema="security" tableName="r_auth_user" domainObjectName="UserAuthority"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+        </table>
+
+    </context>
+</generatorConfiguration>
