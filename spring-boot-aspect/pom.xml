@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>springboot-aspect</artifactId>
+    <artifactId>spring-boot-aspect</artifactId>
 
 
 </project>

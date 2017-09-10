@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>springboot-kafka</artifactId>
+    <artifactId>spring-boot-kafka</artifactId>
 
 
 </project>

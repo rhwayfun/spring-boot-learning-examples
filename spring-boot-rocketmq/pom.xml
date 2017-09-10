@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>springboot-rocketmq</artifactId>
+    <artifactId>spring-boot-rocketmq</artifactId>
 
 
 </project>

@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>springboot-cache-caffeine</artifactId>
+    <artifactId>spring-boot-cache-caffeine</artifactId>
 
 
 </project>
