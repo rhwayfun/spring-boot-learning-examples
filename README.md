@@ -5,7 +5,7 @@
 springboot知识点整理、工程实践，并结合工作案例适当深入
 
 * 使用travis ci持续集成
-* 使用code climate进行代码质量检查
+* 使用codecov进行代码覆盖率检查
 * 学习案例以模块方式划分，每隔模块都是独立可执行项目，直接运行Application即可
 
 # 分享平台
@@ -46,6 +46,7 @@ Github地址：https://github.com/happyxiaofan
 * spring-boot-task（定时任务）
 
     [Spring定时任务源码分析](http://blog.csdn.net/u011116672/article/details/77132205)
+    
     [深入浅出Spring task定时任务](http://blog.csdn.net/u011116672/article/details/52517247)
 * spring-boot-retry（重试和熔断）
 
