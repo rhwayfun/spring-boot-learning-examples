@@ -32,9 +32,7 @@ public class DemoControllerTest {
             public MockHttpServletRequest buildRequest(ServletContext servletContext) {
                 return new MockHttpServletRequest(RequestMethod.GET.name(), "/now");
             }
-        })
-                .andExpect(status().isOk())
-                .andExpect(content().string("hello"));
+        }).andExpect(status().isOk()).andExpect(content().string("hello"));
     }
 
 }
