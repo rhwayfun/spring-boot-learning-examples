@@ -1,4 +1,7 @@
 # spring-boot-learning-examples
+![travis](https://travis-ci.org/happyxiaofan/spring-boot-learning-examples.svg?branch=feature%2Fmodule)
+![coverage](https://codecov.io/gh/happyxiaofan/spring-boot-learning-examples/branch/feature%2Fmodule/graph/badge.svg)
+
 springboot知识点整理、工程实践，并结合工作案例适当深入
 
 * 使用travis ci持续集成
@@ -59,6 +62,7 @@ Github地址：https://github.com/happyxiaofan
 * spring-boot-dubbo-extension（基于duboo扩展点实现自定义扩展）
 * spring-boot-disconf（分布式配置管理disconf使用案例）
 * spring-boot-elasticsearch（全文搜索引擎elasticsearch实践）
+* spring-boot-mongodb（NoSQL数据库mongodb实战）
 * spring-boot-kafka（消息中间件kafka实践）
 * spring-boot-rocketmq（阿里开源消息中间件RocketMQ实践）
 * spring-boot-mockito（Java社区最火的测试框架Mockito使用实战）
