@@ -1,7 +1,8 @@
 language: java
 sudo: false # faster builds
 
-script: "mvn cobertura:cobertura"
+before_install:
+  - pip install --user codecov
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -t e973842b-bf4c-4c04-b87d-5150d41e52bd
+  - codecov
