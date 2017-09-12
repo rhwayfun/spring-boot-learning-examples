@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!-- 
+	Mybatis生成Mapper配置文件
+	1 cmd切换至项目根目录
+	2 mvn mybatis-generator:generate -Dmybatis.generator.configurationFile=src/test/resources/mybatis-generator.xml -Dmybatis.generator.overwrite=true
+ -->
+<generatorConfiguration>
+	<classPathEntry
+			location="C:\Users\zhongchubin\library\mysql\mysql-connector-java\5.1.35\mysql-connector-java-5.1.35.jar" />
+
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<property name="beginningDelimiter" value="`" />
+		<property name="endingDelimiter" value="`" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://127.0.0.1:3306/springboot" userId="springboot" password="springboot">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="com.rhwayfun.springboot.mybatis.entity"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="mybatis" targetProject="src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER"
+							 targetPackage="com.rhwayfun.springboot.mybatis.mapper" targetProject="src/main/java">
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+
+		<table tableName="user" domainObjectName="User" delimitIdentifiers="true">
+			<generatedKey column="id" sqlStatement="MYSQL" identity="true" type="post"/>
+		</table>
+    </context>
+</generatorConfiguration>
