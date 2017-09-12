@@ -32,7 +32,7 @@ Github地址：https://github.com/happyxiaofan
     [spring security实战](http://blog.csdn.net/u011116672/article/details/77428049)
     
 
-3. 缓存使用
+3. 数据存储：缓存
 * spring-boot-cache-caffeine（高性能本地缓存框架caffeine实践）
 * spring-boot-cache-ehcache（Java应用最多的本地缓存Ehcache实践）
 * spring-boot-redis（分布式KV缓存redis实践）
