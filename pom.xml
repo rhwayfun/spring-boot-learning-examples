@@ -416,14 +416,14 @@
                         </execution>
                     </executions>
                 </plugin>
-                <!--<plugin>
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven.plugin.surefire.version}</version>
                     <configuration>
                         <argLine>@{argLine} -Xmx2048m</argLine>
                     </configuration>
-                </plugin>-->
+                </plugin>
                 <plugin>
                     <groupId>org.mybatis.generator</groupId>
                     <artifactId>mybatis-generator-maven-plugin</artifactId>
