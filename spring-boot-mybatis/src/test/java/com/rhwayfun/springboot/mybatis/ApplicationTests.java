@@ -107,9 +107,13 @@ public class ApplicationTests {
 
 	@Test
 	public void deleteTest2() {
-		UserExample example = new UserExample();
-		example.createCriteria().andUserNameEqualTo("springboot");
-		assertTrue(userMapper.deleteByExample(example) > 0);
+		List<User> users = userMapper.selectByExample(new UserExample());
+		if (!CollectionUtils.isEmpty(users)) {
+			User user = users.get(0);
+			UserExample example = new UserExample();
+			example.createCriteria().andIdEqualTo(user.getId());
+			assertTrue(userMapper.deleteByExample(example) > 0);
+		}
 	}
 
 	@Test
