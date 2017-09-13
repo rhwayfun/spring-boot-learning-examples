@@ -116,11 +116,11 @@ public class ApplicationTests {
 	public void distinctOrTest() {
 		UserExample example = new UserExample();
 		example.setDistinct(true);
-		example.setOrderByClause("order by id asc");
 		UserExample.Criteria criteria = example.createCriteria();
 		criteria.andAgeIsNotNull();
 		UserExample.Criteria or = example.or();
 		or.andIdIsNotNull();
+		example.setOrderByClause("id asc");
 		userMapper.selectByExample(example);
 	}
 
