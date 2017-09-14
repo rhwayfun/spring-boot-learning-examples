@@ -7,3 +7,8 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户信息表';
+
+ALTER TABLE `springboot`.`user`
+  CHANGE COLUMN `user_id` `user_id` BIGINT(20) NOT NULL COMMENT '用户id' ,
+  ADD UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC);
+

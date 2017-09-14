@@ -27,6 +27,7 @@
 
         <!-- 数据库使用 -->
         <module>spring-boot-mybatis</module>
+        <module>spring-boot-mybatis-annotation</module>
         <module>spring-boot-mybatis-sharding-jdbc</module>
         <module>spring-boot-mybatis-multidatasource</module>
 

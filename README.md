@@ -39,6 +39,7 @@ Github地址：https://github.com/happyxiaofan
 
 4. 数据库
 * spring-boot-mybatis（mybatis使用快速入门）
+* spring-boot-mybatis-annotation（mybatis全注解使用示例）
 * spring-boot-mybatis-multidatasource（mybatis多数据库解决方案）
 * spring-boot-mybatis-sharding-jdbc（使用sharding-jdbc对数据库进行分库分表）
 
