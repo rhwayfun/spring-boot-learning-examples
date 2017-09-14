@@ -70,6 +70,7 @@ Github地址：https://github.com/happyxiaofan
 * spring-boot-mockito（Java社区最火的测试框架Mockito使用实战）
 * spring-boot-hibernate-validation（Hibernate出品的校验框架使用实战）
 * spring-boot-geode（内存数据库geode实战，目前应用与内部地址位置距离的计算）
+* spring-boot-ignite（内存数据库ignite实战）
 * spring-boot-elastic-job（分布式任务调度框架elastic-job实战）
 
 # 未完待续

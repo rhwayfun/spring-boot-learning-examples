@@ -50,6 +50,7 @@
         <module>spring-boot-hibernate-validation</module>
         <module>spring-boot-mongodb</module>
         <module>spring-boot-geode</module>
+        <module>spring-boot-ignite</module>
         <module>spring-boot-elastic-job</module>
     </modules>
 
