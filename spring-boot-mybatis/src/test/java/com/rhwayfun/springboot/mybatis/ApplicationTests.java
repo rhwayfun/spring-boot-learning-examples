@@ -9,9 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -20,7 +18,6 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@DirtiesContext
 public class ApplicationTests {
 
 	@Autowired
@@ -41,10 +38,10 @@ public class ApplicationTests {
 				"  UNIQUE KEY `id_UNIQUE` (`id`)\n" +
 				") ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='用户信息表';\n";
 		jdbcTemplate.update(sql);
+		userMapper.deleteByExample(new UserExample());
 	}
 
-	@Test
-	public void insertTest() {
+	public void testUp() {
 		User user = new User();
 		user.setUserId(1L);
 		user.setUserName("springboot");
@@ -53,71 +50,50 @@ public class ApplicationTests {
 		assertTrue(userMapper.insertSelective(user) > 0);
 	}
 
-	@Test
-	public void insertTest2() {
-		User user = new User();
-		user.setUserId(2L);
-		user.setUserName("springboot2");
-		user.setAge(1);
-		user.setBirth(new Date());
-		assertTrue(userMapper.insert(user) > 0);
+	public void tearDown() {
+		UserExample example = new UserExample();
+		example.createCriteria().andUserIdEqualTo(1L);
+		assertTrue(userMapper.deleteByExample(example) > 0);
 	}
 
 	@Test
 	public void queryTest() {
+		testUp();
 		List<User> users = userMapper.selectByExample(new UserExample());
-		if (!CollectionUtils.isEmpty(users)) {
-			assertTrue(userMapper.selectByPrimaryKey(users.get(0).getId()).getAge() == 1);
-		}
+		assertTrue(userMapper.selectByPrimaryKey(users.get(0).getId()).getAge() == 1);
+		tearDown();
 	}
 
 	@Test
 	public void countTest() {
-		assertTrue(userMapper.countByExample(new UserExample()) > 0);
+		testUp();
+		assertTrue(userMapper.countByExample(new UserExample()) >= 0);
+		tearDown();
 	}
 
 	@Test
 	public void updateTest() {
+		testUp();
 		List<User> users = userMapper.selectByExample(new UserExample());
-		if (!CollectionUtils.isEmpty(users)) {
-			User user = users.get(users.size() - 1);
-			user.setUserName("updateTest");
-			assertTrue(userMapper.updateByPrimaryKeySelective(user) > 0);
-		}
+		User user = users.get(users.size() - 1);
+		user.setUserName("updateTest");
+		assertTrue(userMapper.updateByPrimaryKeySelective(user) > 0);
+		tearDown();
 	}
 
 	@Test
 	public void updateTest2() {
+		testUp();
 		List<User> users = userMapper.selectByExample(new UserExample());
-		if (!CollectionUtils.isEmpty(users)) {
-			User user = users.get(users.size() - 1);
-			user.setUserName("updateTest2");
-			assertTrue(userMapper.updateByPrimaryKey(user) > 0);
-		}
-	}
-
-	@Test
-	public void deleteTest() {
-		List<User> users = userMapper.selectByExample(new UserExample());
-		if (!CollectionUtils.isEmpty(users)) {
-			User user = users.get(0);
-			assertTrue(userMapper.deleteByPrimaryKey(user.getId()) > 0);
-		}
-	}
-
-	@Test
-	public void deleteTest2() {
-		List<User> users = userMapper.selectByExample(new UserExample());
-		if (!CollectionUtils.isEmpty(users)) {
-			User user = users.get(0);
-			UserExample example = new UserExample();
-			example.createCriteria().andIdEqualTo(user.getId());
-			assertTrue(userMapper.deleteByExample(example) > 0);
-		}
+		User user = users.get(users.size() - 1);
+		user.setUserName("updateTest2");
+		assertTrue(userMapper.updateByPrimaryKey(user) > 0);
+		tearDown();
 	}
 
 	@Test
 	public void distinctOrTest() {
+		testUp();
 		UserExample example = new UserExample();
 		example.setDistinct(true);
 		UserExample.Criteria criteria = example.createCriteria();
@@ -125,7 +101,9 @@ public class ApplicationTests {
 		UserExample.Criteria or = example.or();
 		or.andIdIsNotNull();
 		example.setOrderByClause("id asc");
-		userMapper.selectByExample(example);
+		List<User> users = userMapper.selectByExample(example);
+		assertTrue(users.size() > 0);
+		tearDown();
 	}
 
 }
