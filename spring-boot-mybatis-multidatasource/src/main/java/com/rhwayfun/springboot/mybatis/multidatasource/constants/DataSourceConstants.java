@@ -30,6 +30,12 @@ public abstract class DataSourceConstants {
      * Mybatis Mapper接口路径
      *
      */
-    public static final String MAPPER_PACKAGE = "com.rhwayfun.springboot.mybatis.multidatasource.mapper";
+    public static final String MAPPER_PACKAGE = "com.rhwayfun.springboot.mybatis.multidatasource.mapper.user";
+
+    /**
+     * Mybatis Mapper接口路径
+     *
+     */
+    public static final String MAPPER2_PACKAGE = "com.rhwayfun.springboot.mybatis.multidatasource.mapper.city";
 
 }

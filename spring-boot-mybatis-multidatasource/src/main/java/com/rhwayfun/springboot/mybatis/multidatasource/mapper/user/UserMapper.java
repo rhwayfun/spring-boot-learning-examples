@@ -1,4 +1,4 @@
-package com.rhwayfun.springboot.mybatis.multidatasource.mapper;
+package com.rhwayfun.springboot.mybatis.multidatasource.mapper.user;
 
 import com.rhwayfun.springboot.mybatis.multidatasource.constants.SqlConstants;
 import com.rhwayfun.springboot.mybatis.multidatasource.entity.UserEntity;

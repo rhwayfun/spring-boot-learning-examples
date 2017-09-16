@@ -1,7 +1,7 @@
 package com.rhwayfun.springboot.mybatis.multidatasource.mapper;
 
 import com.rhwayfun.springboot.mybatis.multidatasource.entity.CityEntity;
-import com.rhwayfun.springboot.mybatis.multidatasource.entity.UserEntity;
+import com.rhwayfun.springboot.mybatis.multidatasource.mapper.city.CityMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

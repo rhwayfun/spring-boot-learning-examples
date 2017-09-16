@@ -21,7 +21,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @ConfigurationProperties(prefix = DataSourceConstants.DATASOURCE2_PREFIX)
-@MapperScan(basePackages = { DataSourceConstants.MAPPER_PACKAGE }, sqlSessionFactoryRef = "mybatisSqlSessionFactory2")
+@MapperScan(basePackages = { DataSourceConstants.MAPPER2_PACKAGE }, sqlSessionFactoryRef = "mybatisSqlSessionFactory2")
 public class DataSource2Config {
 
     private String url;

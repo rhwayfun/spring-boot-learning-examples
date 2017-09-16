@@ -1,4 +1,4 @@
-package com.rhwayfun.springboot.mybatis.multidatasource.mapper;
+package com.rhwayfun.springboot.mybatis.multidatasource.mapper.city;
 
 import com.rhwayfun.springboot.mybatis.multidatasource.constants.SqlConstants;
 import com.rhwayfun.springboot.mybatis.multidatasource.entity.CityEntity;
