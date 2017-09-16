@@ -8,7 +8,9 @@ package com.rhwayfun.springboot.mybatis.multidatasource.constants;
  */
 public abstract class SqlConstants {
 
-    /**   TABLE >>>>>>>>>>  user  */
+    /**
+     * TABLE >>>>>>>>>>  user
+     */
 
     public static final String GET_ALL_SQL = "SELECT * FROM user";
 
@@ -23,7 +25,11 @@ public abstract class SqlConstants {
     public static final String DELETE_ALL_SQL = "DELETE FROM user";
 
 
-    /**   TABLE >>>>>>>>>>  city  */
+    /**
+     * TABLE >>>>>>>>>>  city
+     */
+
+    public static final String CITY_CREATE_SQL = "CREATE TABLE IF NOT EXISTS `city` (`id` int(11) unsigned NOT NULL DEFAULT '1' COMMENT '记录ID',`name` varchar(128) DEFAULT NULL COMMENT '城市名称',`is_active` tinyint(3) unsigned DEFAULT '0' COMMENT '是否开放',`create_time` datetime DEFAULT NULL COMMENT '创建时间',`modify_time` datetime DEFAULT NULL COMMENT '修改时间',PRIMARY KEY (`id`),KEY `idx_name` (`name`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='城市信息表';";
 
     public static final String CITY_GET_ALL_SQL = "SELECT * FROM city";
 

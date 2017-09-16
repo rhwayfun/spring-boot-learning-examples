@@ -1,5 +1,6 @@
 package com.rhwayfun.springboot.mybatis.multidatasource.mapper;
 
+import com.rhwayfun.springboot.mybatis.multidatasource.constants.SqlConstants;
 import com.rhwayfun.springboot.mybatis.multidatasource.entity.CityEntity;
 import com.rhwayfun.springboot.mybatis.multidatasource.mapper.city.CityMapper;
 import org.junit.Before;
@@ -7,9 +8,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
 
@@ -23,23 +31,14 @@ public class CityMapperTest {
     @Autowired
     private CityMapper cityMapper;
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    @Resource
+    private DataSource mybatisDataSource2;
 
     private CityEntity city;
 
     @Before
     public void setup() throws Exception {
-        String sql = "CREATE TABLE IF NOT EXISTS `city` (\n" +
-                "  `id` int(11) unsigned NOT NULL DEFAULT '1' COMMENT '记录ID',\n" +
-                "  `name` varchar(128) DEFAULT NULL COMMENT '城市名称',\n" +
-                "  `is_active` tinyint(3) unsigned DEFAULT '0' COMMENT '是否开放',\n" +
-                "  `create_time` datetime DEFAULT NULL COMMENT '创建时间',\n" +
-                "  `modify_time` datetime DEFAULT NULL COMMENT '修改时间',\n" +
-                "  PRIMARY KEY (`id`),\n" +
-                "  KEY `idx_name` (`name`)\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='城市信息表';";
-        jdbcTemplate.update(sql);
+        createTable();
         cityMapper.deleteAll();
         city = new CityEntity();
         city.setId(1);
@@ -47,6 +46,25 @@ public class CityMapperTest {
         city.setActive(Boolean.TRUE);
         city.setCreateTime(new Date());
         city.setModifyTime(new Date());
+    }
+
+    private void createTable() {
+        Connection con = null;
+        Statement stmt = null;
+        try {
+            con = mybatisDataSource2.getConnection();
+            stmt = con.createStatement();
+            stmt.executeUpdate(SqlConstants.CITY_CREATE_SQL);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null) stmt.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void testUp() throws Exception {
