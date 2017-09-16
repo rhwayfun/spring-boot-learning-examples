@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
@@ -22,10 +23,23 @@ public class CityMapperTest {
     @Autowired
     private CityMapper cityMapper;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     private CityEntity city;
 
     @Before
     public void setup() throws Exception {
+        String sql = "CREATE TABLE IF NOT EXISTS `city` (\n" +
+                "  `id` int(11) unsigned NOT NULL DEFAULT '1' COMMENT '记录ID',\n" +
+                "  `name` varchar(128) DEFAULT NULL COMMENT '城市名称',\n" +
+                "  `is_active` tinyint(3) unsigned DEFAULT '0' COMMENT '是否开放',\n" +
+                "  `create_time` datetime DEFAULT NULL COMMENT '创建时间',\n" +
+                "  `modify_time` datetime DEFAULT NULL COMMENT '修改时间',\n" +
+                "  PRIMARY KEY (`id`),\n" +
+                "  KEY `idx_name` (`name`)\n" +
+                ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='城市信息表';";
+        jdbcTemplate.update(sql);
         cityMapper.deleteAll();
         city = new CityEntity();
         city.setId(1);
