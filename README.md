@@ -72,6 +72,7 @@ Github地址：https://github.com/happyxiaofan
 * spring-boot-geode（内存数据库geode实战，目前应用与内部地址位置距离的计算）
 * spring-boot-ignite（内存数据库ignite实战）
 * spring-boot-elastic-job（分布式任务调度框架elastic-job实战）
+* spring-boot-starter（自定义spring boot starter）
 
 # 未完待续
 更多案例不断补充中。。。如果您觉得对你有用，就给我点个赞吧\(^o^)/~
