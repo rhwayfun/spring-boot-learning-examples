@@ -53,6 +53,7 @@
         <module>spring-boot-ignite</module>
         <module>spring-boot-elastic-job</module>
         <module>spring-boot-starter</module>
+        <module>spring-boot-starter-rest</module>
     </modules>
 
 
