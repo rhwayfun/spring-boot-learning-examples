@@ -95,6 +95,7 @@
         <kafka-clients.version>0.11.0.0</kafka-clients.version>
         <caffeine.version>2.5.5</caffeine.version>
         <spring-retry.version>1.2.1.RELEASE</spring-retry.version>
+        <sharding-jdbc.version>1.5.4.1</sharding-jdbc.version>
 
         <!-- plugin -->
         <maven.plugin.aspectj.version>1.10</maven.plugin.aspectj.version>
@@ -282,6 +283,7 @@
                 <version>${commons-logging.version}</version>
             </dependency>
 
+            <!-- Disconf -->
             <dependency>
                 <groupId>com.baidu.disconf</groupId>
                 <artifactId>disconf-client</artifactId>
@@ -289,6 +291,7 @@
                 <version>${disconf-client.version}</version>
             </dependency>
 
+            <!-- Validation -->
             <dependency>
                 <groupId>javax.validation</groupId>
                 <artifactId>validation-api</artifactId>
@@ -301,6 +304,7 @@
                 <version>${javax.el.version}</version>
             </dependency>
 
+            <!-- Mybatis For SpringBoot -->
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -321,10 +325,18 @@
                 <version>${druid.version}</version>
             </dependency>
 
+            <!-- Kafka -->
             <dependency>
                 <groupId>org.apache.kafka</groupId>
                 <artifactId>kafka-clients</artifactId>
                 <version>${kafka-clients.version}</version>
+            </dependency>
+
+            <!-- Sharding-jdbc -->
+            <dependency>
+                <groupId>com.dangdang</groupId>
+                <artifactId>sharding-jdbc-core</artifactId>
+                <version>${sharding-jdbc.version}</version>
             </dependency>
 
             <dependency>

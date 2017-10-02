@@ -1,7 +1,19 @@
-/*       授权语句（所有数据库的所有权限） */
-grant all privileges on *.* to travis@127.0.0.1;
+/*      创建用户travis，因为travis是travis-ci默认的用户名      */
+create user travis@localhost;
+/*      授权语句（所有数据库的所有权限）      */
+grant all privileges on *.* to travis@127.0.0.1;/* mac系统下127.0.0.1要改成localhost */
+/*      查看MySQL所有用户      */
+SELECT DISTINCT CONCAT('User: ''',user,'''@''',host,''';') AS query FROM mysql.user;
+/*      查看travis用户的权限      */
+show grants for travis@localhost;
+
+
+
 
 /*       Database springboot         */
+
+CREATE  DATABASE springboot;
+
 CREATE TABLE `user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增，主键',
   `user_id` bigint(20) DEFAULT NULL COMMENT '用户id',
@@ -17,6 +29,9 @@ ALTER TABLE `springboot`.`user`
   ADD UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC);
 
 /*       Database springboot2        */
+
+CREATE  DATABASE springboot2;
+
 CREATE TABLE `city` (
   `id` int(11) unsigned NOT NULL DEFAULT '1' COMMENT '记录ID',
   `name` varchar(128) DEFAULT NULL COMMENT '城市名称',
