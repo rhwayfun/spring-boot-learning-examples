@@ -45,7 +45,6 @@ public class DataSourceConfig {
     private String password;
 
     @Bean(name = "mybatisDataSource")
-    //@Primary
     public DataSource getDataSource() throws SQLException {
         //设置分库映射
         Map<String, DataSource> dataSourceMap = new HashMap<>(2);
@@ -57,7 +56,7 @@ public class DataSourceConfig {
 
         //设置分表映射
         TableRule userTableRule = TableRule.builder("user")
-                .generateKeyColumn("user_id") //分布式主键
+                .generateKeyColumn("user_id") //将user_id作为分布式主键
                 .actualTables(Arrays.asList("user_0", "user_1"))
                 .dataSourceRule(dataSourceRule)
                 .build();
@@ -75,12 +74,38 @@ public class DataSourceConfig {
         return dataSource;
     }
 
-    private DataSource mybatisDataSource(final String dataSourceName) {
+    private DataSource mybatisDataSource(final String dataSourceName) throws SQLException {
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setDriverClassName(DataSourceConstants.DRIVER_CLASS);
         dataSource.setUrl(String.format(url, dataSourceName));
         dataSource.setUsername(username);
         dataSource.setPassword(password);
+
+        /* 配置初始化大小、最小、最大 */
+        dataSource.setInitialSize(1);
+        dataSource.setMinIdle(1);
+        dataSource.setMaxActive(20);
+
+        /* 配置获取连接等待超时的时间 */
+        dataSource.setMaxWait(60000);
+
+        /* 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 */
+        dataSource.setTimeBetweenEvictionRunsMillis(60000);
+
+        /* 配置一个连接在池中最小生存的时间，单位是毫秒 */
+        dataSource.setMinEvictableIdleTimeMillis(300000);
+
+        dataSource.setValidationQuery("SELECT 'x'");
+        dataSource.setTestWhileIdle(true);
+        dataSource.setTestOnBorrow(false);
+        dataSource.setTestOnReturn(false);
+
+        /* 打开PSCache，并且指定每个连接上PSCache的大小 */
+        dataSource.setPoolPreparedStatements(false);
+        dataSource.setMaxPoolPreparedStatementPerConnectionSize(20);
+
+        /* 配置监控统计拦截的filters */
+        dataSource.setFilters("stat");
         return dataSource;
     }
 
@@ -91,7 +116,7 @@ public class DataSourceConfig {
      */
     // TODO: 2017/10/2  这里先留个口子，后续添加事务使用案例
     @Bean(name = "mybatisTransactionManager")
-    public DataSourceTransactionManager mybatisTransactionManager() {
+    public DataSourceTransactionManager mybatisTransactionManager() throws SQLException {
         return new DataSourceTransactionManager(mybatisDataSource("springboot"));
     }
 
