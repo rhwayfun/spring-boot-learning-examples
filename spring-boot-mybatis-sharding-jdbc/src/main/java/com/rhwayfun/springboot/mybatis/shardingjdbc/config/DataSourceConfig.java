@@ -45,7 +45,7 @@ public class DataSourceConfig {
     private String password;
 
     @Bean(name = "mybatisDataSource")
-    @Primary
+    //@Primary
     public DataSource getDataSource() throws SQLException {
         //设置分库映射
         Map<String, DataSource> dataSourceMap = new HashMap<>(2);
@@ -57,6 +57,7 @@ public class DataSourceConfig {
 
         //设置分表映射
         TableRule userTableRule = TableRule.builder("user")
+                .generateKeyColumn("user_id") //分布式主键
                 .actualTables(Arrays.asList("user_0", "user_1"))
                 .dataSourceRule(dataSourceRule)
                 .build();

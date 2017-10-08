@@ -20,6 +20,8 @@ public abstract class SqlConstants {
 
     public static final String INSERT_SQL = "INSERT INTO user(user_id,city_id,user_name,age,birth) VALUES(#{userId}, #{cityId}, #{userName}, #{age}, #{birth})";
 
+    public static final String INSERT_SLAVE_SQL = "INSERT INTO user(city_id,user_name,age,birth) VALUES(#{cityId}, #{userName}, #{age}, #{birth})";
+
     public static final String UPDATE_SQL = "UPDATE user SET user_name=#{userName},age=#{age},birth=#{birth} WHERE user_id =#{userId}";
 
     public static final String DELETE_SQL = "DELETE FROM user WHERE user_id =#{userId}";

@@ -2,7 +2,6 @@ package com.rhwayfun.springboot.mybatis.shardingjdbc.mapper;
 
 import com.rhwayfun.springboot.mybatis.shardingjdbc.costants.SqlConstants;
 import com.rhwayfun.springboot.mybatis.shardingjdbc.entity.UserEntity;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -79,6 +78,21 @@ public class UserMapperTest {
         List<UserEntity> all = userMapper.getAll();
         assertTrue(all.size() > 0);
         tearDown();
+    }
+
+    @Test
+    public void getOneSlave() throws Exception {
+        UserEntity user = new UserEntity();
+        user.setCityId(1);
+        user.setUserName("insertTest");
+        user.setAge(10);
+        user.setBirth(new Date());
+        assertTrue(userMapper.insertSlave(user) > 0);
+        Long userId = user.getUserId();
+        System.out.println("Generated Key--userId:" + userId);
+        UserEntity one = userMapper.getOne(userId);
+        assertEquals("insertTest", one.getUserName());
+        assertTrue(userMapper.delete(userId) > 0);
     }
 
     @Test

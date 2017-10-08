@@ -31,6 +31,10 @@ public interface UserMapper {
     @Insert(SqlConstants.INSERT_SQL)
     int insert(UserEntity user);
 
+    @Insert(SqlConstants.INSERT_SLAVE_SQL)
+    @Options(useGeneratedKeys = true, keyProperty = "userId")
+    int insertSlave(UserEntity user);
+
     @Update(SqlConstants.UPDATE_SQL)
     int update(UserEntity user);
 
