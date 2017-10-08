@@ -100,12 +100,14 @@ public class DataSourceConfig {
         dataSource.setTestOnBorrow(false);
         dataSource.setTestOnReturn(false);
 
-        /* 打开PSCache，并且指定每个连接上PSCache的大小 */
+        /* 打开PSCache，并且指定每个连接上PSCache的大小。
+           如果用Oracle，则把poolPreparedStatements配置为true，
+           mysql可以配置为false。分库分表较多的数据库，建议配置为false */
         dataSource.setPoolPreparedStatements(false);
         dataSource.setMaxPoolPreparedStatementPerConnectionSize(20);
 
         /* 配置监控统计拦截的filters */
-        dataSource.setFilters("stat");
+        dataSource.setFilters("stat,wall,log4j");
         return dataSource;
     }
 
