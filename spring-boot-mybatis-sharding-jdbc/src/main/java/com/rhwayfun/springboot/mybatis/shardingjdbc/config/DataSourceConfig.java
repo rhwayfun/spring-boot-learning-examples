@@ -112,14 +112,13 @@ public class DataSourceConfig {
     }
 
     /**
-     * Sharding-jdbc的事务需要单独的依赖支持
+     * Sharding-jdbc的事务支持
      *
      * @return
      */
-    // TODO: 2017/10/2  这里先留个口子，后续添加事务使用案例
     @Bean(name = "mybatisTransactionManager")
-    public DataSourceTransactionManager mybatisTransactionManager() throws SQLException {
-        return new DataSourceTransactionManager(mybatisDataSource("springboot"));
+    public DataSourceTransactionManager mybatisTransactionManager(@Qualifier("mybatisDataSource") DataSource dataSource) throws SQLException {
+        return new DataSourceTransactionManager(dataSource);
     }
 
     @Bean(name = "mybatisSqlSessionFactory")

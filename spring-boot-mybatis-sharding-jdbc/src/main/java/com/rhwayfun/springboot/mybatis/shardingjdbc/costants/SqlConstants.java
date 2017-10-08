@@ -18,6 +18,8 @@ public abstract class SqlConstants {
 
     public static final String GET_ONE_SQL = "SELECT * FROM user WHERE user_id = #{userId}";
 
+    public static final String GET_LIMIT_ONE_SQL = "SELECT * FROM user LIMIT 1";
+
     public static final String INSERT_SQL = "INSERT INTO user(user_id,city_id,user_name,age,birth) VALUES(#{userId}, #{cityId}, #{userName}, #{age}, #{birth})";
 
     public static final String INSERT_SLAVE_SQL = "INSERT INTO user(city_id,user_name,age,birth) VALUES(#{cityId}, #{userName}, #{age}, #{birth})";

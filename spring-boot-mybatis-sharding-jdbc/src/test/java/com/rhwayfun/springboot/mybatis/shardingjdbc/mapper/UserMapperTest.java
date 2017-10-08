@@ -2,6 +2,7 @@ package com.rhwayfun.springboot.mybatis.shardingjdbc.mapper;
 
 import com.rhwayfun.springboot.mybatis.shardingjdbc.costants.SqlConstants;
 import com.rhwayfun.springboot.mybatis.shardingjdbc.entity.UserEntity;
+import com.rhwayfun.springboot.mybatis.shardingjdbc.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +30,9 @@ public class UserMapperTest {
 
     @Resource
     private DataSource mybatisDataSource;
+
+    @Resource
+    private UserService userService;
 
     private UserEntity user;
 
@@ -113,6 +117,34 @@ public class UserMapperTest {
         UserEntity one = userMapper.getOne(1L);
         assertEquals("insertTest2", one.getUserName());
         tearDown();
+    }
+
+    @Test
+    public void updateFailure() {
+        try {
+            userService.updateWithFail();
+        } catch (Exception e) {
+            System.out.println("rollback");
+        }
+        UserEntity one = userMapper.getOne(userService.getUserId());
+        assertTrue(one == null);
+    }
+
+    @Test
+    public void updateWithoutInsertFailure() {
+        try {
+            UserEntity user = new UserEntity();
+            user.setCityId(1);
+            user.setUserName("insertTest");
+            user.setAge(10);
+            user.setBirth(new Date());
+            userMapper.insertSlave(user);
+            userService.updateWithoutInsertFail();
+        } catch (Exception e) {
+            System.out.println("rollback");
+        }
+        UserEntity one = userMapper.getOne(userService.getUserId());
+        assertEquals("insertTest", one.getUserName());
     }
 
 }

@@ -28,6 +28,10 @@ public interface UserMapper {
     @ResultMap(value = "userResultMap")
     UserEntity getOne(Long userId);
 
+    @Select(SqlConstants.GET_LIMIT_ONE_SQL)
+    @ResultMap(value = "userResultMap")
+    UserEntity getLimitOne();
+
     @Insert(SqlConstants.INSERT_SQL)
     int insert(UserEntity user);
 
