@@ -86,8 +86,36 @@ springboot知识点整理、工程实践，并结合工作案例适当深入
 
 ## 准备工作
 
-* [数据库脚本](docs/sql/springboot/spring-boot-mybatis.sql)
-* IDE运行`mvn clean compile`
+> [数据库脚本](docs/sql/springboot/spring-boot-mybatis.sql)
+
+### 安装MySQL
+
+### 添加用户`travis`
+
+ ```
+ create user travis@localhost;
+ ```
+### 授权
+
+```
+grant all privileges on *.* to travis@localhost;/* mac系统下localhost要改成127.0.0.1 */      
+```
+
+### 查看权限
+
+```
+/*      查看MySQL所有用户      */
+SELECT DISTINCT CONCAT('User: ''',user,'''@''',host,''';') AS query FROM mysql.user;
+/*      查看travis用户的权限      */
+show grants for travis@localhost; 
+```
+
+### 编译运行
+
+```
+mvn clean compile
+mvn clean package
+```
 
 
 ## 未完待续
