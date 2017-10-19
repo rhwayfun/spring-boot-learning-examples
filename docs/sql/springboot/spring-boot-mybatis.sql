@@ -1,7 +1,7 @@
 /*      创建用户travis，因为travis是travis-ci默认的用户名      */
 create user travis@localhost;
 /*      授权语句（所有数据库的所有权限）      */
-grant all privileges on *.* to travis@127.0.0.1;/* mac系统下127.0.0.1要改成localhost */
+grant all privileges on *.* to travis@localhost;/* mac系统下localhost要改成127.0.0.1 */
 /*      查看MySQL所有用户      */
 SELECT DISTINCT CONCAT('User: ''',user,'''@''',host,''';') AS query FROM mysql.user;
 /*      查看travis用户的权限      */
