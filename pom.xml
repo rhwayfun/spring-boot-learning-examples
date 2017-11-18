@@ -55,6 +55,7 @@
         <module>spring-boot-starter</module>
         <module>spring-boot-starter-rest</module>
         <module>spring-boot-logging-log4j2</module>
+        <module>spring-boot-rocketmq-starter</module>
     </modules>
 
 
