@@ -16,7 +16,7 @@ import java.util.List;
  * @author rhwayfun
  * @since 0.0.1
  */
-public abstract class AbstractMessageListener implements MessageListenerConcurrently {
+public class AbstractMessageListener implements MessageListenerConcurrently {
 
     private static Logger logger = LoggerFactory.getLogger(AbstractMessageListener.class);
 
