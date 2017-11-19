@@ -34,7 +34,7 @@
 
         <dependency>
             <groupId>io.shardingjdbc</groupId>
-            <artifactId>sharding-jdbc</artifactId>
+            <artifactId>sharding-jdbc-core</artifactId>
         </dependency>
 
         <dependency>
