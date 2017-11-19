@@ -3,9 +3,9 @@ package com.rhwayfun.springboot.rocketmq.starter.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * Created by ZhongCB on 2017/8/2.
+ * @author rhwayfun
+ * @since 0.0.1
  */
-
 @ConfigurationProperties(prefix = RocketMqProperties.ROCKETMQ_PREFIX)
 public class RocketMqProperties {
 

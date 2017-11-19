@@ -1,6 +1,8 @@
 package com.rhwayfun.springboot.rocketmq.starter.config;
 
-import com.alibaba.rocketmq.client.consumer.listener.MessageListener;
+import com.rhwayfun.springboot.rocketmq.starter.common.AbstractMessageListener;
+import com.rhwayfun.springboot.rocketmq.starter.handler.HandlerInitializingBean;
+import org.apache.rocketmq.client.consumer.listener.MessageListener;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -8,11 +10,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Created by ZhongCB on 2017/8/2.
+ * @author rhwayfun
+ * @since 0.0.1
  */
-
 @Configuration
-@ConditionalOnClass({ DispatchMessageListener.class })
+@ConditionalOnClass({ AbstractMessageListener.class })
 @AutoConfigureBefore(RocketMqAutoConfiguration.class)
 public class RocketMqHandlerAutoConfiguration {
 
@@ -24,7 +26,7 @@ public class RocketMqHandlerAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean(MessageListener.class)
     public MessageListener messageListener() {
-        return new DispatchMessageListener();
+        return new AbstractMessageListener();
     }
 
 }

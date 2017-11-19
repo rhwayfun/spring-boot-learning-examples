@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rhwayfun.springboot.mybatis.shardingjdbc.masterslave.mapper.UserMapper">
+    <resultMap id="baseResultMap" type="com.rhwayfun.springboot.mybatis.shardingjdbc.masterslave.entity.UserEntity">
+        <result column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="age" jdbcType="INTEGER" property="age" />
+        <result column="birth" jdbcType="DATE" property="birth" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id, user_name, age, birth
+    </sql>
+
+    <update id="createIfNotExistsTable">
+        CREATE TABLE IF NOT EXISTS `t_user` (`id` bigint(20) AUTO_INCREMENT, `user_id` bigint(20) NOT NULL COMMENT '用户id',`city_id` int(11) DEFAULT NULL COMMENT '城市id',`user_name` varchar(15) DEFAULT NULL,`age` int(11) DEFAULT NULL COMMENT '年龄',`birth` date DEFAULT NULL COMMENT '生日',PRIMARY KEY (`id`))
+    </update>
+
+    <update id="truncateTable">
+        TRUNCATE TABLE t_user;
+    </update>
+
+    <update id="dropTable">
+        DROP TABLE IF EXISTS t_user;
+    </update>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO t_user(city_id,user_name,age,birth) VALUES(#{cityId}, #{userName}, #{age}, #{birth})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM t_user WHERE user_id =#{userId}
+    </delete>
+
+    <select id="find" resultMap="baseResultMap">
+        SELECT
+        <!--include refid="Base_Column_List" />-->
+        user_id, user_name, age, birth
+        FROM
+        t_user
+        WHERE
+        user_id =#{userId}
+    </select>
+</mapper>

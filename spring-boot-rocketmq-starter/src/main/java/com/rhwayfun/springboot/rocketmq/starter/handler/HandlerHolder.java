@@ -1,12 +1,12 @@
-package com.rhwayfun.springboot.rocketmq.starter.config;
+package com.rhwayfun.springboot.rocketmq.starter.handler;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Created by ZhongCB on 2017/8/2.
+ * @author rhwayfun
+ * @since 0.0.1
  */
-
 public class HandlerHolder {
 
     private static Map<String, MessageHandler> cacheHandlers = new ConcurrentHashMap<>();

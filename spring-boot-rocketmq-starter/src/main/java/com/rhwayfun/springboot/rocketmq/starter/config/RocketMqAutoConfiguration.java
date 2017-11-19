@@ -1,9 +1,9 @@
 package com.rhwayfun.springboot.rocketmq.starter.config;
 
-import com.alibaba.rocketmq.client.consumer.DefaultMQPushConsumer;
-import com.alibaba.rocketmq.client.consumer.listener.MessageListener;
-import com.alibaba.rocketmq.client.exception.MQClientException;
-import com.alibaba.rocketmq.common.consumer.ConsumeFromWhere;
+import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
+import org.apache.rocketmq.client.consumer.listener.MessageListener;
+import org.apache.rocketmq.client.exception.MQClientException;
+import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -17,9 +17,9 @@ import org.springframework.util.StringUtils;
 import javax.annotation.Resource;
 
 /**
- * Created by ZhongCB on 2017/8/2.
+ * @author rhwayfun
+ * @since 0.0.1
  */
-
 @Configuration
 @ConditionalOnClass({ DefaultMQPushConsumer.class })
 @EnableConfigurationProperties(RocketMqProperties.class)

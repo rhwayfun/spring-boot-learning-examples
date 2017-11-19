@@ -1,9 +1,11 @@
-package com.rhwayfun.springboot.rocketmq.starter.config;
+package com.rhwayfun.springboot.rocketmq.starter.common;
 
-import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
-import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
-import com.alibaba.rocketmq.client.consumer.listener.MessageListenerConcurrently;
-import com.alibaba.rocketmq.common.message.MessageExt;
+import com.rhwayfun.springboot.rocketmq.starter.handler.HandlerHolder;
+import com.rhwayfun.springboot.rocketmq.starter.handler.MessageHandler;
+import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
+import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
+import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
+import org.apache.rocketmq.common.message.MessageExt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,12 +13,12 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
- * Created by ZhongCB on 2017/8/2.
+ * @author rhwayfun
+ * @since 0.0.1
  */
+public abstract class AbstractMessageListener implements MessageListenerConcurrently {
 
-public class DispatchMessageListener implements MessageListenerConcurrently {
-
-    private static Logger logger = LoggerFactory.getLogger(DispatchMessageListener.class);
+    private static Logger logger = LoggerFactory.getLogger(AbstractMessageListener.class);
 
     @Override
     public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {

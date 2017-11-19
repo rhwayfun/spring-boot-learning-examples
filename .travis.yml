@@ -9,6 +9,13 @@ before_install:
   - pip install --user codecov
   - mysql -e 'CREATE DATABASE springboot;' # create database springboot
   - mysql -e 'CREATE DATABASE springboot2;' # create database springboot2
+  - mysql -e 'CREATE DATABASE ds_master_0;' # create database ds_master_0
+  - mysql -e 'CREATE DATABASE ds_master_0_slave_0;' # create database ds_master_0_slave_0
+  - mysql -e 'CREATE DATABASE ds_master_0_slave_1;' # create database ds_master_0_slave_1
+  - mysql -e 'CREATE DATABASE ds_master_1;' # create database ds_master_1
+  - mysql -e 'CREATE DATABASE ds_master_1_slave_0;' # create database ds_master_1_slave_0
+  - mysql -e 'CREATE DATABASE ds_master_1_slave_1;' # create database ds_master_1_slave_1
+
 
 after_success:
   - codecov

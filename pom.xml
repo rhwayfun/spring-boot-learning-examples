@@ -28,8 +28,9 @@
         <!-- 数据库使用 -->
         <module>spring-boot-mybatis</module>
         <module>spring-boot-mybatis-annotation</module>
-        <module>spring-boot-mybatis-sharding-jdbc</module>
         <module>spring-boot-mybatis-multidatasource</module>
+        <module>spring-boot-mybatis-sharding-jdbc</module>
+        <module>spring-boot-mybatis-sharding-jdbc-masterslave</module>
 
         <!-- spring其他功能 -->
         <module>spring-boot-retry</module>
@@ -43,6 +44,7 @@
 
         <!-- 企业开发进阶 -->
         <module>spring-boot-rocketmq</module>
+        <module>spring-boot-rocketmq-starter</module>
         <module>spring-boot-disconf</module>
         <module>spring-boot-kafka</module>
         <module>spring-boot-mockito</module>
@@ -55,7 +57,6 @@
         <module>spring-boot-starter</module>
         <module>spring-boot-starter-rest</module>
         <module>spring-boot-logging-log4j2</module>
-        <module>spring-boot-rocketmq-starter</module>
     </modules>
 
 
@@ -97,7 +98,10 @@
         <kafka-clients.version>0.11.0.0</kafka-clients.version>
         <caffeine.version>2.5.5</caffeine.version>
         <spring-retry.version>1.2.1.RELEASE</spring-retry.version>
-        <sharding-jdbc.version>1.5.4.1</sharding-jdbc.version>
+        <sharding-jdbc.version>2.0.0.M2</sharding-jdbc.version>
+        <sharding-jdbc-old.version>1.5.4.1</sharding-jdbc-old.version>
+        <lombok.version>1.16.18</lombok.version>
+        <rocketmq.version>4.1.0-incubating</rocketmq.version>
 
         <!-- plugin -->
         <maven.plugin.aspectj.version>1.10</maven.plugin.aspectj.version>
@@ -336,13 +340,25 @@
 
             <!-- Sharding-jdbc -->
             <dependency>
-                <groupId>com.dangdang</groupId>
-                <artifactId>sharding-jdbc-core</artifactId>
+                <groupId>io.shardingjdbc</groupId>
+                <artifactId>sharding-jdbc</artifactId>
+                <version>${sharding-jdbc.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.shardingjdbc</groupId>
+                <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
                 <version>${sharding-jdbc.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.dangdang</groupId>
+                <artifactId>sharding-jdbc-core</artifactId>
+                <version>${sharding-jdbc-old.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.shardingjdbc</groupId>
                 <artifactId>sharding-jdbc-transaction</artifactId>
                 <version>${sharding-jdbc.version}</version>
             </dependency>
@@ -375,6 +391,19 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-log4j2</artifactId>
                 <version>${spring.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <!-- RocketMQ -->
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-client</artifactId>
+                <version>${rocketmq.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
