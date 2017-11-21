@@ -7,9 +7,6 @@ SELECT DISTINCT CONCAT('User: ''',user,'''@''',host,''';') AS query FROM mysql.u
 /*      查看travis用户的权限      */
 show grants for travis@localhost;
 
-
-
-
 /*       Database springboot         */
 
 CREATE  DATABASE springboot;
@@ -41,3 +38,13 @@ CREATE TABLE `city` (
   PRIMARY KEY (`id`),
   KEY `idx_name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='城市信息表';
+
+
+/*       Database For Sharding-JDBC         */
+
+CREATE DATABASE ds_master_0; # create database ds_master_0
+CREATE DATABASE ds_master_0_slave_0; # create database ds_master_0_slave_0
+CREATE DATABASE ds_master_0_slave_1; # create database ds_master_0_slave_1
+CREATE DATABASE ds_master_1; # create database ds_master_1
+CREATE DATABASE ds_master_1_slave_0; # create database ds_master_1_slave_0
+CREATE DATABASE ds_master_1_slave_1; # create database ds_master_1_slave_1

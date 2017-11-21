@@ -1,8 +1,8 @@
-# spring-boot-learning-examples
+# Spring Boot Learning Examples，打造最全的Spring Boot实践指南
 ![travis](https://travis-ci.org/rhwayfun/spring-boot-learning-examples.svg?branch=feature%2Fmodule)
 ![coverage](https://codecov.io/gh/rhwayfun/spring-boot-learning-examples/branch/feature%2Fmodule/graph/badge.svg)
 
-springboot知识点整理、工程实践，并结合工作案例适当深入
+Spring Boot知识点整理、工程实践，并结合工作案例适当深入
 
 * 使用travis ci持续集成
 * 使用codecov进行代码覆盖率检查
@@ -17,7 +17,7 @@ springboot知识点整理、工程实践，并结合工作案例适当深入
 ## 项目模块
 ```
 └── 基础入门
-└── Web开发
+└── web开发
 └── 缓存使用
 └── 数据库
 └── Spring其他功能
@@ -26,18 +26,19 @@ springboot知识点整理、工程实践，并结合工作案例适当深入
 
 ### 基础入门
 
-* spring-boot-quickstart（springboot快速入门案例）
-* spring-boot-configuration（了解下springboot配置管理）
+* spring-boot-quickstart（Spring Boot快速入门案例）
+* spring-boot-configuration（了解下Spring Boot配置管理）
 
-### Web开发
+### web开发
 
 * spring-boot-web-jsp（使用JSP作为开发）
 * spring-boot-web-thymeleaf（使用模板引擎thymeleaf开发）
 * spring-boot-web-bootstrap（bootstrap入门demo）
 * spring-boot-security（权限控制项目实战）
-* spring-boot-security-cas（集成CAS搭建自己的认证中心）
-
+    
     [spring security实战](http://blog.csdn.net/u011116672/article/details/77428049)
+    
+* spring-boot-security-cas（集成CAS搭建自己的认证中心）
     
 
 ### 缓存使用
@@ -50,6 +51,12 @@ springboot知识点整理、工程实践，并结合工作案例适当深入
 * spring-boot-mybatis-annotation（mybatis全注解使用示例）
 * spring-boot-mybatis-multidatasource（mybatis多数据库解决方案）
 * spring-boot-mybatis-sharding-jdbc（使用sharding-jdbc对数据库进行分库分表）
+    
+    [Sharding-JDBC分库分表使用实例](http://blog.csdn.net/u011116672/article/details/78374724)
+    
+* spring-boot-mybatis-sharding-jdbc-masterslave（使用sharding-jdbc完成分库分表+读写分离）
+    
+    [Sharding-JDBC读写分离探秘](http://blog.csdn.net/u011116672/article/details/78576117)
 
 ### Spring其他功能
 * spring-boot-task（定时任务）
@@ -57,6 +64,7 @@ springboot知识点整理、工程实践，并结合工作案例适当深入
     [Spring定时任务源码分析](http://blog.csdn.net/u011116672/article/details/77132205)
     
     [深入浅出Spring task定时任务](http://blog.csdn.net/u011116672/article/details/52517247)
+    
 * spring-boot-retry（重试和熔断）
 
     [重试框架Spring retry实践](http://blog.csdn.net/u011116672/article/details/77823867)
@@ -75,6 +83,7 @@ springboot知识点整理、工程实践，并结合工作案例适当深入
 * spring-boot-mongodb（NoSQL数据库mongodb实战）
 * spring-boot-kafka（消息中间件kafka实践）
 * spring-boot-rocketmq（阿里开源消息中间件RocketMQ实践）
+* spring-boot-rocketmq-starter（阿里开源消息中间件RocketMQ Spring Boot Starter）
 * spring-boot-mockito（Java社区最火的测试框架Mockito使用实战）
 * spring-boot-hibernate-validation（Hibernate出品的校验框架使用实战）
 * spring-boot-geode（内存数据库geode实战，目前应用与内部地址位置距离的计算）
@@ -83,6 +92,7 @@ springboot知识点整理、工程实践，并结合工作案例适当深入
 * spring-boot-starter（自定义spring boot starter）
 * spring-boot-starter-rest（自定义spring boot starter）
 * spring-boot-logging-log4j2（使用log4j2）
+* spring-boot-influxdb（时序数据库influxDB实践）
 
 ## 准备工作
 
