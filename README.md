@@ -1,4 +1,4 @@
-# Spring Boot Learning Examples，打造最全的Spring Boot实践指南
+# 最全的Spring Boot实践指南
 ![travis](https://travis-ci.org/rhwayfun/spring-boot-learning-examples.svg?branch=feature%2Fmodule)
 ![coverage](https://codecov.io/gh/rhwayfun/spring-boot-learning-examples/branch/feature%2Fmodule/graph/badge.svg)
 
