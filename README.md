@@ -1,11 +1,12 @@
 # 最全的Spring Boot实践指南
 ![travis](https://travis-ci.org/rhwayfun/spring-boot-learning-examples.svg?branch=feature%2Fmodule)
 ![coverage](https://codecov.io/gh/rhwayfun/spring-boot-learning-examples/branch/feature%2Fmodule/graph/badge.svg)
+[![license](https://img.shields.io/badge/license-EPL%201.0-green.svg)](https://choosealicense.com/licenses/epl-1.0/)
 
 Spring Boot知识点整理、工程实践，并结合工作案例适当深入
 
-* 使用travis ci持续集成
-* 使用codecov进行代码覆盖率检查
+* 使用Travis ci持续集成
+* 使用Codecov进行代码覆盖率检查
 * 学习案例以模块方式划分，每隔模块都是独立可执行项目，直接运行Application即可
 
 ## 分享平台
