@@ -1,4 +1,4 @@
-package com.rhwayfun.springboot.rocketmq.starter.config;
+package com.rhwayfun.springboot.rocketmq.starter.msg;
 
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
@@ -17,7 +17,7 @@ import java.util.List;
  * @author rhwayfun
  * @since 0.0.1
  */
-public class RocketMqAutoConfigurationTest {
+public class TestRocketMqMessage {
 
     @Test
     public void producer() throws Exception {
