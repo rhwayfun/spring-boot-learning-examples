@@ -9,13 +9,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = RocketMqProperties.ROCKETMQ_PREFIX)
 public class RocketMqProperties {
 
-    public static final String ROCKETMQ_PREFIX = "dispatch.rocketmq";
+    static final String ROCKETMQ_PREFIX = "spring.rocketmq";
+
     private String nameServer;
     private String producerGroupName;
     private String consumerGroupName;
     private Integer consumeThreadMin;
     private Integer consumeThreadMax;
-    private String subscribes;
+    //private String subscribes;
 
     public String getNameServer() {
         return nameServer;
@@ -57,11 +58,11 @@ public class RocketMqProperties {
         this.consumeThreadMax = consumeThreadMax;
     }
 
-    public String getSubscribes() {
+    /*public String getSubscribes() {
         return subscribes;
     }
 
     public void setSubscribes(String subscribes) {
         this.subscribes = subscribes;
-    }
+    }*/
 }

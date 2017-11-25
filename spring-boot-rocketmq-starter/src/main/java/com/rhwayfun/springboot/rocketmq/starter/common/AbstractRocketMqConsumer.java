@@ -1,6 +1,5 @@
 package com.rhwayfun.springboot.rocketmq.starter.common;
 
-import com.rhwayfun.springboot.rocketmq.starter.handler.HandlerHolder;
 import com.rhwayfun.springboot.rocketmq.starter.handler.MessageHandler;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -13,12 +12,16 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
+ * Abstract message listener.
+ * For consume message, you should inherit this class to implement three methods.
  * @author rhwayfun
  * @since 0.0.1
  */
-public class AbstractMessageListener implements MessageListenerConcurrently {
+public abstract class AbstractRocketMqConsumer
+        extends AbstractRocketMqSubscribe
+        implements MessageListenerConcurrently, MessageHandler {
 
-    private static Logger logger = LoggerFactory.getLogger(AbstractMessageListener.class);
+    protected Logger logger = LoggerFactory.getLogger(getClass());
 
     @Override
     public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
@@ -28,7 +31,7 @@ public class AbstractMessageListener implements MessageListenerConcurrently {
         String key = msg.getKeys();
         String topic = msg.getTopic();
         String tags = msg.getTags();
-        logger.info(Thread.currentThread().getName() + " Receive New Messages: " + bodyString + " ,key:" + key
+        logger.warn(Thread.currentThread().getName() + " Receive New Messages: " + bodyString + " ,key:" + key
                 + ",tags:" + tags + ",topic:" + topic);
 
         long bornTimestamp = msg.getBornTimestamp();
@@ -40,18 +43,14 @@ public class AbstractMessageListener implements MessageListenerConcurrently {
             logger.warn("msg:{} is invalid, it was born {}s ago", msg, timeElapsedFromStoreInMqToReceiveMsg / 1000);
             return consumeConcurrentlyStatus;
         }
-        String handlerKey = topic + tags;
-        MessageHandler handler = HandlerHolder.getHandler(handlerKey);
-        if (null != handler) {
-            try {
-                consumeConcurrentlyStatus = handler.handle(key, body);
-            } catch (Throwable t) {
-                logger.warn("mq handler error, msg info:{}", msg, t);
-                if (msg.getReconsumeTimes() == 5) {
-                    return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
-                }
-                return ConsumeConcurrentlyStatus.RECONSUME_LATER;
+        try {
+            consumeConcurrentlyStatus = handle(msg);
+        } catch (Throwable t) {
+            logger.warn("mq handler error, msg info:{}", msg, t);
+            if (msg.getReconsumeTimes() == 5) {
+                return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
+            return ConsumeConcurrentlyStatus.RECONSUME_LATER;
         }
         return consumeConcurrentlyStatus;
     }

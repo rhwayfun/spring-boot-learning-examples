@@ -1,4 +1,4 @@
-package com.rhwayfun.springboot.rocketmq.starter;
+package com.rhwayfun.springboot.rocketmq;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * 程序入口
  *
- * @author happyxiaofan
+ * @author rhwayfun
  * @since 0.0.1
  */
 @SpringBootApplication

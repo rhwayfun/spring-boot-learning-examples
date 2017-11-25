@@ -1,7 +1,7 @@
 package com.rhwayfun.springboot.rocketmq.starter.config;
 
+import com.rhwayfun.springboot.rocketmq.starter.common.AbstractRocketMqConsumer;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
-import org.apache.rocketmq.client.consumer.listener.MessageListener;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.slf4j.Logger;
@@ -12,9 +12,9 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author rhwayfun
@@ -32,8 +32,8 @@ public class RocketMqAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnBean(value = MessageListener.class)
-    public DefaultMQPushConsumer defaultMQPushConsumer(MessageListener messageListener) {
+    @ConditionalOnBean(value = AbstractRocketMqConsumer.class)
+    public DefaultMQPushConsumer defaultMQPushConsumer(List<AbstractRocketMqConsumer> messageListeners) {
         /**
          * 一个应用创建一个Consumer，由应用来维护此对象，可以设置为全局对象或者单例<br>
          * 注意：ConsumerGroupName需要由应用来保证唯一
@@ -48,29 +48,22 @@ public class RocketMqAutoConfiguration {
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
         consumer.setNamesrvAddr(rocketMqProperties.getNameServer());
 
-        try {
-            String subscribes = rocketMqProperties.getSubscribes();
-            if (StringUtils.hasText(subscribes)) {
-                String[] topicAndExpressions = subscribes.split(";");
-                for (String tes : topicAndExpressions) {
-                    String[] te = tes.split(",");
-                    consumer.subscribe(te[0], te[1]);
-                    LOGGER.info("subscribe, top:{}, expression:{}", te[0], te[1]);
-                }
+        messageListeners.forEach(messageListener -> {
+            String topic = messageListener.getTopic();
+            String tags = messageListener.getTags();
+            try {
+                consumer.subscribe(topic, tags);
+            } catch (MQClientException e) {
+                LOGGER.error("consumer subscribe error", e);
             }
-        } catch (MQClientException e) {
-            LOGGER.error("consumer subscribe error", e);
-        }
+            LOGGER.info("subscribe, topic:{}, tags:{}", topic, tags);
+            consumer.registerMessageListener(messageListener);
+        });
 
-        consumer.registerMessageListener(messageListener);
-
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            @Override
-            public void run() {
-                LOGGER.info("consumer shutdown");
-                consumer.shutdown();
-                LOGGER.info("consumer has shutdown");
-            }
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            LOGGER.info("consumer shutdown");
+            consumer.shutdown();
+            LOGGER.info("consumer has shutdown");
         }));
 
         try {
