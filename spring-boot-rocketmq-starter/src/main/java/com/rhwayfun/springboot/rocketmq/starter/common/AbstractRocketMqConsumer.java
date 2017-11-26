@@ -1,9 +1,13 @@
 package com.rhwayfun.springboot.rocketmq.starter.common;
 
+import com.rhwayfun.springboot.rocketmq.starter.constants.RocketMqContent;
+import com.rhwayfun.springboot.rocketmq.starter.constants.RocketMqTag;
+import com.rhwayfun.springboot.rocketmq.starter.constants.RocketMqTopic;
 import com.rhwayfun.springboot.rocketmq.starter.handler.MessageHandler;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
+import org.apache.rocketmq.client.consumer.listener.MessageListenerOrderly;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,21 +22,24 @@ import java.util.List;
  * @since 0.0.1
  */
 public abstract class AbstractRocketMqConsumer
-        extends AbstractRocketMqSubscribe
-        implements MessageListenerConcurrently, MessageHandler {
+        extends AbstractRocketMqSubscribe implements MessageHandler, MessageListenerConcurrently {
 
-    protected Logger logger = LoggerFactory.getLogger(getClass());
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
+
+    public void init() {
+
+    }
 
     @Override
     public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
         MessageExt msg = msgs.get(0);
-        byte[] body = msg.getBody();
+        /*byte[] body = msg.getBody();
         String bodyString = getBodyString(body);
         String key = msg.getKeys();
         String topic = msg.getTopic();
         String tags = msg.getTags();
         logger.warn(Thread.currentThread().getName() + " Receive New Messages: " + bodyString + " ,key:" + key
-                + ",tags:" + tags + ",topic:" + topic);
+                + ",tags:" + tags + ",topic:" + topic);*/
 
         long bornTimestamp = msg.getBornTimestamp();
         long currentTimeMillis = System.currentTimeMillis();
@@ -44,13 +51,9 @@ public abstract class AbstractRocketMqConsumer
             return consumeConcurrentlyStatus;
         }
         try {
-            consumeConcurrentlyStatus = handle(msg);
+            consumeConcurrentlyStatus = handle(topic, tag, content, msg) ? ConsumeConcurrentlyStatus.CONSUME_SUCCESS : ConsumeConcurrentlyStatus.RECONSUME_LATER;
         } catch (Throwable t) {
             logger.warn("mq handler error, msg info:{}", msg, t);
-            if (msg.getReconsumeTimes() == 5) {
-                return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
-            }
-            return ConsumeConcurrentlyStatus.RECONSUME_LATER;
         }
         return consumeConcurrentlyStatus;
     }

@@ -1,7 +1,9 @@
 package com.rhwayfun.springboot.rocketmq.starter.handler;
 
 
-import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
+import com.rhwayfun.springboot.rocketmq.starter.constants.RocketMqContent;
+import com.rhwayfun.springboot.rocketmq.starter.constants.RocketMqTag;
+import com.rhwayfun.springboot.rocketmq.starter.constants.RocketMqTopic;
 import org.apache.rocketmq.common.message.MessageExt;
 
 /**
@@ -10,6 +12,6 @@ import org.apache.rocketmq.common.message.MessageExt;
  */
 public interface MessageHandler{
 
-    ConsumeConcurrentlyStatus handle(MessageExt msg);
+    boolean handle(RocketMqTopic topic, RocketMqTag tag, RocketMqContent content, MessageExt msg);
 
 }

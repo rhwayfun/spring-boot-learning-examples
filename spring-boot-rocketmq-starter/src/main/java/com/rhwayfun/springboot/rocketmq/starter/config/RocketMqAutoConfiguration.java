@@ -1,6 +1,9 @@
 package com.rhwayfun.springboot.rocketmq.starter.config;
 
 import com.rhwayfun.springboot.rocketmq.starter.common.AbstractRocketMqConsumer;
+import com.rhwayfun.springboot.rocketmq.starter.constants.RocketMqTag;
+import com.rhwayfun.springboot.rocketmq.starter.constants.RocketMqTopic;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
@@ -12,9 +15,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author rhwayfun
@@ -49,14 +54,23 @@ public class RocketMqAutoConfiguration {
         consumer.setNamesrvAddr(rocketMqProperties.getNameServer());
 
         messageListeners.forEach(messageListener -> {
-            String topic = messageListener.getTopic();
-            String tags = messageListener.getTags();
-            try {
-                consumer.subscribe(topic, tags);
-            } catch (MQClientException e) {
-                LOGGER.error("consumer subscribe error", e);
-            }
-            LOGGER.info("subscribe, topic:{}, tags:{}", topic, tags);
+            Map<RocketMqTopic, Set<RocketMqTag>> subscribeTopicTags = messageListener.subscribeTopicTags();
+            subscribeTopicTags.entrySet().forEach(e -> {
+                try {
+                    RocketMqTopic rocketMqTopic = e.getKey();
+                    Set<RocketMqTag> rocketMqTags = e.getValue();
+                    if (CollectionUtils.isEmpty(rocketMqTags)) {
+                        consumer.subscribe(rocketMqTopic.getTopic(), "*");
+                    } else {
+                        Set<String> tagSet = rocketMqTags.stream().map(RocketMqTag::getTag).collect(Collectors.toSet());
+                        String tags = StringUtils.join(tagSet, " || ");
+                        consumer.subscribe(rocketMqTopic.getTopic(), tags);
+                        LOGGER.info("subscribe, topic:{}, tags:{}", rocketMqTopic.getTopic(), tags);
+                    }
+                } catch (MQClientException ex) {
+                    LOGGER.error("consumer subscribe error", ex);
+                }
+            });
             consumer.registerMessageListener(messageListener);
         });
 
