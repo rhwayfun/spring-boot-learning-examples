@@ -11,7 +11,7 @@ import java.io.UnsupportedEncodingException;
  * @author rhwayfun
  * @since 0.0.1
  */
-@Component
+/*@Component
 public class DemoRocketMqConsumer extends AbstractRocketMqConsumer {
 
     @Override
@@ -33,4 +33,4 @@ public class DemoRocketMqConsumer extends AbstractRocketMqConsumer {
         }
         return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
     }
-}
+}*/
