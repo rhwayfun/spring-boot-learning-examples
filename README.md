@@ -1,6 +1,7 @@
 # 最全的Spring Boot实践指南
 ![travis](https://travis-ci.org/rhwayfun/spring-boot-learning-examples.svg?branch=feature%2Fmodule)
 ![coverage](https://codecov.io/gh/rhwayfun/spring-boot-learning-examples/branch/feature%2Fmodule/graph/badge.svg)
+[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/spring-boot-learning-examples/bgm?source=orgpage)
 [![license](https://img.shields.io/badge/license-EPL%201.0-green.svg)](https://choosealicense.com/licenses/epl-1.0/)
 
 Spring Boot知识点整理、工程实践，并结合工作案例适当深入
