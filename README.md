@@ -6,8 +6,8 @@
 
 Spring Boot知识点整理、工程实践，并结合工作案例适当深入
 
-* 使用Travis ci持续集成
-* 使用Codecov进行代码覆盖率检查
+* 使用Travis CI持续集成
+* 使用CodeCov进行代码覆盖率检查
 * 学习案例以模块方式划分，每隔模块都是独立可执行项目，直接运行Application即可
 
 ## 分享平台
@@ -19,11 +19,36 @@ Spring Boot知识点整理、工程实践，并结合工作案例适当深入
 ## 项目模块
 ```
 └── 基础入门
-└── web开发
+└── Web开发
+    └── Weex
+    └── Bootstrap
+    └── thymeleaf
 └── 缓存使用
+    └── Ehcache
+    └── Caffeine
+    └── Guava Cache
 └── 数据库
+    └── Mybatis
+    └── MySQL
 └── Spring其他功能
+    └── Spring Task
+    └── Spring Retry
+    └── Spring AOP
 └── 企业开发进阶
+    └── Dubbo（阿里开源的分布式服务治理框架）
+    └── Kafka
+    └── RocketMQ
+    └── Sharding-JDBC
+    └── Disconf
+    └── Elsaticsearch
+    └── Elsatic-job
+    └── Redis
+    └── MongoDB
+    └── Mockito
+    └── InfluxDB
+    └── Ignite
+    └── Geode
+    └── ...
 ```
 
 ### 基础入门
@@ -85,7 +110,13 @@ Spring Boot知识点整理、工程实践，并结合工作案例适当深入
 * spring-boot-mongodb（NoSQL数据库mongodb实战）
 * spring-boot-kafka（消息中间件kafka实践）
 * spring-boot-rocketmq（阿里开源消息中间件RocketMQ实践）
+
+    spring-boot-rocketmq-starter使用案例
+
 * spring-boot-rocketmq-starter（阿里开源消息中间件RocketMQ Spring Boot Starter）
+    
+    [spring-boot-rocketmq-starter 使用指南](apache-rocketmq-starter-guide.md)
+    
 * spring-boot-mockito（Java社区最火的测试框架Mockito使用实战）
 * spring-boot-hibernate-validation（Hibernate出品的校验框架使用实战）
 * spring-boot-geode（内存数据库geode实战，目前应用与内部地址位置距离的计算）
@@ -95,6 +126,7 @@ Spring Boot知识点整理、工程实践，并结合工作案例适当深入
 * spring-boot-starter-rest（自定义spring boot starter）
 * spring-boot-logging-log4j2（使用log4j2）
 * spring-boot-influxdb（时序数据库influxDB实践）
+* spring-boot-mybatis-sharding-jdbc（分库分表Sharding-JDBC实践）
 
 ## 准备工作
 
