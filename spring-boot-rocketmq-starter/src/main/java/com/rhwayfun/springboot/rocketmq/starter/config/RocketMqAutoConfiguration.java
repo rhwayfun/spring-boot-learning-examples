@@ -1,12 +1,11 @@
 package com.rhwayfun.springboot.rocketmq.starter.config;
 
 import com.rhwayfun.springboot.rocketmq.starter.common.AbstractRocketMqConsumer;
-import com.rhwayfun.springboot.rocketmq.starter.constants.RocketMqTag;
-import com.rhwayfun.springboot.rocketmq.starter.constants.RocketMqTopic;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
+import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -18,8 +17,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author rhwayfun
@@ -50,22 +50,24 @@ public class RocketMqAutoConfiguration {
         if (rocketMqProperties.getConsumeThreadMax() != null) {
             consumer.setConsumeThreadMax(rocketMqProperties.getConsumeThreadMax());
         }
+        if (rocketMqProperties.getMessageModel() != null) {
+            consumer.setMessageModel(MessageModel.valueOf(rocketMqProperties.getMessageModel()));
+        }
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
         consumer.setNamesrvAddr(rocketMqProperties.getNameServer());
 
         messageListeners.forEach(messageListener -> {
-            Map<RocketMqTopic, Set<RocketMqTag>> subscribeTopicTags = messageListener.subscribeTopicTags();
+            Map<String, Set<String>> subscribeTopicTags = messageListener.subscribeTopicTags();
             subscribeTopicTags.entrySet().forEach(e -> {
                 try {
-                    RocketMqTopic rocketMqTopic = e.getKey();
-                    Set<RocketMqTag> rocketMqTags = e.getValue();
+                    String rocketMqTopic = e.getKey();
+                    Set<String> rocketMqTags = e.getValue();
                     if (CollectionUtils.isEmpty(rocketMqTags)) {
-                        consumer.subscribe(rocketMqTopic.getTopic(), "*");
+                        consumer.subscribe(rocketMqTopic, "*");
                     } else {
-                        Set<String> tagSet = rocketMqTags.stream().map(RocketMqTag::getTag).collect(Collectors.toSet());
-                        String tags = StringUtils.join(tagSet, " || ");
-                        consumer.subscribe(rocketMqTopic.getTopic(), tags);
-                        LOGGER.info("subscribe, topic:{}, tags:{}", rocketMqTopic.getTopic(), tags);
+                        String tags = StringUtils.join(rocketMqTags, " || ");
+                        consumer.subscribe(rocketMqTopic, tags);
+                        LOGGER.info("subscribe, topic:{}, tags:{}", rocketMqTopic, tags);
                     }
                 } catch (MQClientException ex) {
                     LOGGER.error("consumer subscribe error", ex);

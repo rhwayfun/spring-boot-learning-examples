@@ -1,4 +1,4 @@
-package com.rhwayfun.springboot.rocketmq.mq;
+package com.rhwayfun.springboot.rocketmq.other;
 
 import com.rhwayfun.springboot.rocketmq.starter.common.AbstractRocketMqConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;

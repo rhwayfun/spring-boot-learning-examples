@@ -1,5 +1,6 @@
-package com.rhwayfun.springboot.rocketmq.starter.msg;
+package com.rhwayfun.springboot.rocketmq.other;
 
+import com.rhwayfun.springboot.rocketmq.mq.DemoRocketMqContent;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -8,7 +9,6 @@ import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.common.message.MessageExt;
-import org.apache.rocketmq.remoting.common.RemotingHelper;
 import org.junit.Test;
 
 import java.util.List;
@@ -23,16 +23,20 @@ public class TestRocketMqMessage {
     public void producer() throws Exception {
         //Instantiate with a producer group name.
         DefaultMQProducer producer = new
-                DefaultMQProducer("please_rename_unique_group_name");
+                DefaultMQProducer("ExampleProducer");
         producer.setNamesrvAddr("localhost:9876");
         //Launch the instance.
         producer.start();
         for (int i = 0; i < 100; i++) {
             //Create a message instance, specifying topic, tag and message body.
-            Message msg = new Message("TopicTest" /* Topic */,
+            DemoRocketMqContent content = new DemoRocketMqContent();
+            content.setCityId(i);
+            content.setDesc("城市" + i);
+            Message msg = new Message("TopicA" /* Topic */,
                     "TagA" /* Tag */,
-                    ("Hello RocketMQ " +
-                            i).getBytes(RemotingHelper.DEFAULT_CHARSET) /* Message body */
+                    content.toString().getBytes()
+                    /*("Hello RocketMQ " +
+                            i).getBytes(RemotingHelper.DEFAULT_CHARSET) *//* Message body */
             );
             //Call send message to deliver message to one of brokers.
             SendResult sendResult = producer.send(msg);
@@ -47,7 +51,7 @@ public class TestRocketMqMessage {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("ExampleConsumer");
         consumer.setNamesrvAddr("localhost:9876");
         // Subscribe topics
-        consumer.subscribe("TopicTest", "TagA");
+        consumer.subscribe("TopicA", "TagA");
         // Register message listener
         consumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override

@@ -16,7 +16,7 @@ public class RocketMqProperties {
     private String consumerGroupName;
     private Integer consumeThreadMin;
     private Integer consumeThreadMax;
-    //private String subscribes;
+    private String messageModel;//CLUSTERING、BROADCASTING，默认CLUSTER
 
     public String getNameServer() {
         return nameServer;
@@ -58,11 +58,12 @@ public class RocketMqProperties {
         this.consumeThreadMax = consumeThreadMax;
     }
 
-    /*public String getSubscribes() {
-        return subscribes;
+    public String getMessageModel() {
+        return messageModel;
     }
 
-    public void setSubscribes(String subscribes) {
-        this.subscribes = subscribes;
-    }*/
+    public void setMessageModel(String messageModel) {
+        this.messageModel = messageModel;
+    }
+
 }
