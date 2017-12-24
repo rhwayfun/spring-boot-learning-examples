@@ -18,15 +18,15 @@
         </dependency>
 
         <dependency>
-            <groupId>com.rhwayfun</groupId>
+            <groupId>io.github.rhwayfun</groupId>
             <artifactId>spring-boot-rocketmq-starter</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.3.RELEASE</version>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
         </dependency>
     </dependencies>
 

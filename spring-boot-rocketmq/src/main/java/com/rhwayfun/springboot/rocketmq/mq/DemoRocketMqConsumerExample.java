@@ -1,6 +1,6 @@
 package com.rhwayfun.springboot.rocketmq.mq;
 
-import com.rhwayfun.springboot.rocketmq.starter.common.AbstractRocketMqConsumer;
+import io.github.rhwayfun.springboot.rocketmq.starter.common.AbstractRocketMqConsumer;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,7 @@ import java.util.Set;
  */
 @Component
 public class DemoRocketMqConsumerExample
-        extends AbstractRocketMqConsumer<DemoRocketMqTopic, DemoRocketMqTag, DemoRocketMqContent> {
+        extends AbstractRocketMqConsumer<DemoRocketMqTopic, DemoRocketMqContent> {
 
     @Override
     public Map<String, Set<String>> subscribeTopicTags() {
@@ -28,9 +28,13 @@ public class DemoRocketMqConsumerExample
     }
 
     @Override
-    public boolean handle(String topic, String tag, DemoRocketMqContent content, MessageExt msg) {
-        logger.info("receive msg[{}], topic:{}, tag:{}, content:{}", msg, topic, tag, content);
-        return true;
+    public String getConsumerGroup() {
+        return "spring-boot-test-consumer-group";
     }
 
+    @Override
+    public boolean consumeMsg(DemoRocketMqContent content, MessageExt msg) {
+        logger.info("receive msg[{}], topic:{}, tag:{}, content:{}", msg, content);
+        return false;
+    }
 }

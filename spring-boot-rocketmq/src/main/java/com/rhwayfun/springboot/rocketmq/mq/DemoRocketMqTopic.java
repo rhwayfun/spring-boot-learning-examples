@@ -1,6 +1,6 @@
 package com.rhwayfun.springboot.rocketmq.mq;
 
-import com.rhwayfun.springboot.rocketmq.starter.constants.RocketMqTopic;
+import io.github.rhwayfun.springboot.rocketmq.starter.constants.RocketMqTopic;
 
 /**
  * @author rhwayfun
