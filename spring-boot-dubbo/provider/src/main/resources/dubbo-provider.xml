@@ -10,6 +10,6 @@
 
     <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}"/>
 
-    <dubbo:service interface="com.rhwayfun.springboot.dubbo.api.DemoProvider" ref="demoProviderImpl"/>
+    <dubbo:service interface="com.rhwayfun.springboot.dubbo.api.DemoProvider" ref="demoProviderImpl" mock="true"/>
 
 </beans>

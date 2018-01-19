@@ -8,6 +8,6 @@
 
     <dubbo:registry address="${dubbo.registry.zk}"/>
 
-    <dubbo:reference id="demoProvider" interface="com.rhwayfun.springboot.dubbo.api.DemoProvider" check="false"/>
+    <dubbo:reference id="demoProvider" interface="com.rhwayfun.springboot.dubbo.api.DemoProvider" check="false" mock="true"/>
 
 </beans>
