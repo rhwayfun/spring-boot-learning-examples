@@ -1,6 +1,6 @@
 # 最全的Spring Boot实践指南
 ![travis](https://travis-ci.org/rhwayfun/spring-boot-learning-examples.svg?branch=develop)
-![coverage](https://codecov.io/gh/rhwayfun/spring-boot-learning-examples/branch/feature%2Fmodule/graph/badge.svg)
+[![codecov](https://codecov.io/gh/rhwayfun/spring-boot-learning-examples/branch/develop/graph/badge.svg)](https://codecov.io/gh/rhwayfun/spring-boot-learning-examples)
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/spring-boot-learning-examples/chat)
 [![license](https://img.shields.io/badge/license-EPL%201.0-green.svg)](https://choosealicense.com/licenses/epl-1.0/)
 
