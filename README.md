@@ -4,7 +4,7 @@
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/spring-boot-learning-examples/chat)
 [![license](https://img.shields.io/badge/license-EPL%201.0-green.svg)](https://choosealicense.com/licenses/epl-1.0/)
 
-Spring Boot知识点整理、工程实践，并结合工作案例深入
+Spring Boot知识点整理、工程实践，并结合工作案例进行深入
 
 * 使用Travis CI持续集成
 * 使用CodeCov进行代码覆盖率检查
