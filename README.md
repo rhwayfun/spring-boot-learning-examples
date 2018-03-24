@@ -6,8 +6,8 @@
 
 Spring Boot知识点整理、工程实践，并结合工作案例进行深入
 
-* 使用Travis CI持续集成
-* 使用CodeCov进行代码覆盖率检查
+* 使用travis-ci持续集成
+* 使用codecov进行代码覆盖率检查
 * 学习案例以模块方式划分，每隔模块都是独立可执行项目，直接运行Application即可
 
 ## 分享平台
@@ -104,6 +104,9 @@ Spring Boot知识点整理、工程实践，并结合工作案例进行深入
 ### 企业开发进阶
 * spring-boot-dubbo（服务治理框架dubbo使用案例）
 * spring-boot-dubbo-annotation（服务治理框架dubbo案例，基于注解实现）
+
+    [dubbo-spring-boot-project](https://github.com/apache/incubator-dubbo-spring-boot-project)
+
 * spring-boot-dubbo-extension（基于duboo扩展点实现自定义扩展）
 * spring-boot-disconf（分布式配置管理disconf使用案例）
 * spring-boot-elasticsearch（全文搜索引擎elasticsearch实践）
