@@ -11,7 +11,7 @@
         <Property name="logging.file.warn.name">${sys:logging.file.path}/${project.name}-warn.log</Property>
         <Property name="logging.file.error.name">${sys:logging.file.path}/${project.name}-error.log</Property>
 
-        <Property name="layout">%d %p [%t] %c{10}:%M:%L %X{traceId, 0} %m%n</Property>
+        <Property name="layout">%d %p [%t] %c{10}:%M:%L %X{traceId,0} %m%n</Property>
     </Properties>
 
     <Appenders>
