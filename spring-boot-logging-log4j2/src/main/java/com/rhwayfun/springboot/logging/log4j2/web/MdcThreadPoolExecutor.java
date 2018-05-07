@@ -7,16 +7,6 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-/**
- * A SLF4J MDC-compatible {@link ThreadPoolExecutor}.
- * <p/>
- * In general, MDC is used to store diagnostic information (e.g. a user's session id) in per-thread variables, to facilitate
- * logging. However, although MDC data is passed to thread children, this doesn't work when threads are reused in a
- * thread pool. This is a drop-in replacement for {@link ThreadPoolExecutor} sets MDC data before each task appropriately.
- * <p/>
- * Created by jlevy.
- * Date: 6/14/13
- */
 public class MdcThreadPoolExecutor extends ThreadPoolExecutor {
 
     final private boolean useFixedContext;
@@ -67,7 +57,7 @@ public class MdcThreadPoolExecutor extends ThreadPoolExecutor {
      */
     @Override
     public void execute(Runnable command) {
-        super.execute(wrap(command, getContextForTask()));
+        super.execute(wrap(command, MDC.getCopyOfContextMap()));
     }
 
     public static Runnable wrap(final Runnable runnable, final Map<String, String> context) {
