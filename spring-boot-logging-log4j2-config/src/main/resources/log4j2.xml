@@ -14,6 +14,10 @@
     </Properties>
 
     <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${layout}"/>
+        </Console>
+
         <RollingRandomAccessFile name="actionLogFile"
                                  immediateFlush="true" fileName="${logging.file.action.name}"
                                  filePattern="${logging.file.action.name}.%d{yyyy-MM-dd}">
@@ -65,5 +69,9 @@
         <Logger name="traceSplitLogger" level="info" additivity="false">
             <AppenderRef ref="traceSplitAppender"/>
         </Logger>
+
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+        </Root>
     </Loggers>
 </Configuration>

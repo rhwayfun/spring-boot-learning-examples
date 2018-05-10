@@ -14,9 +14,6 @@ import org.apache.logging.log4j.core.filter.ThresholdFilter;
 import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.springframework.util.StringUtils;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author rhwayfun
  * @since 0.0.1
@@ -65,6 +62,8 @@ public class Log4j2XmlConfiguration extends ConfigurationFactory {
                 ThresholdFilter warnThresholdFilter = ThresholdFilter.createFilter(Level.WARN, Filter.Result.ACCEPT, Filter.Result.NEUTRAL);
                 ThresholdFilter errorThresholdFilter = ThresholdFilter.createFilter(Level.ERROR, Filter.Result.ACCEPT, Filter.Result.NEUTRAL);
 
+                LoggerConfig rootLogger = getRootLogger();
+                rootLogger.setLevel(Level.DEBUG);
                 ConsoleAppender consoleAppender = ConsoleAppender.createDefaultAppenderForLayout(patternLayout);
                 consoleAppender.start();
                 addAppender(consoleAppender);
@@ -72,12 +71,15 @@ public class Log4j2XmlConfiguration extends ConfigurationFactory {
                 randomAccessFileAppender = RollingRandomAccessFileAppender.createAppender(loggingFileName, loggingFileName + "-%d{yyyy-MM-dd-HH}", null, "Rolling", "true", null, timeBasedTriggeringPolicy, null, patternLayout, thresholdFilter, "false", null, null, configuration);
                 randomAccessFileAppender.start();
                 addAppender(randomAccessFileAppender);
+                rootLogger.addAppender(randomAccessFileAppender, Level.INFO, null);
                 randomAccessFileAppender = RollingRandomAccessFileAppender.createAppender(loggingFileWarnName, loggingFileWarnName + "-%d{yyyy-MM-dd}", null, "RollingWarn", "true", null, timeBasedTriggeringPolicy, null, patternLayout, warnThresholdFilter, null, null, null, configuration);
                 randomAccessFileAppender.start();
                 addAppender(randomAccessFileAppender);
+                rootLogger.addAppender(randomAccessFileAppender, Level.WARN, null);
                 randomAccessFileAppender = RollingRandomAccessFileAppender.createAppender(loggingFileErrorName, loggingFileErrorName + "-%d{yyyy-MM-dd}", null, "RollingError", "true", null, timeBasedTriggeringPolicy, null, patternLayout, errorThresholdFilter, null, null, null, configuration);
                 randomAccessFileAppender.start();
                 addAppender(randomAccessFileAppender);
+                rootLogger.addAppender(randomAccessFileAppender, Level.ERROR, null);
                 randomAccessFileAppender = RollingRandomAccessFileAppender.createAppender(loggingFileMonitorName, loggingFileMonitorName + "-monitor.log-%d{yyyy-MM-dd-HH}", null, "RollingMonitor", "true", null, timeBasedTriggeringPolicy, null, msnPatternLayout, thresholdFilter, null, null, null, configuration);
                 randomAccessFileAppender.start();
                 addAppender(randomAccessFileAppender);
@@ -112,15 +114,6 @@ public class Log4j2XmlConfiguration extends ConfigurationFactory {
                 addLogger("RocketmqClient", loggerConfig);
                 loggerConfig = LoggerConfig.createLogger(false, Level.WARN, "com.alibaba.dubbo.registry.zookeeper", "true", new AppenderRef[]{}, null, configuration, null);
                 addLogger("com.alibaba.dubbo.registry.zookeeper", loggerConfig);
-
-                AppenderRef console = AppenderRef.createAppenderRef("Console", Level.INFO, thresholdFilter);
-                AppenderRef rolling = AppenderRef.createAppenderRef("Rolling", Level.INFO, thresholdFilter);
-                AppenderRef rollingWarn = AppenderRef.createAppenderRef("RollingWarn", Level.WARN, warnThresholdFilter);
-                AppenderRef rollingError = AppenderRef.createAppenderRef("RollingError", Level.ERROR, errorThresholdFilter);
-                AppenderRef[] refs = new AppenderRef[]{console, rolling, rollingWarn, rollingError};
-                LoggerConfig rootLogger = getRootLogger();
-                rootLogger.setLevel(Level.INFO);
-                rootLogger.getAppenderRefs().addAll(Arrays.asList(refs));
             }
         }
     }

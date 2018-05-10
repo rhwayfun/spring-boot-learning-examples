@@ -27,6 +27,13 @@ public class Log4j2Controller {
     public String id(@PathVariable String id) {
         logger.info("test id:{}", id);
         BigdataUtilImpl.logAction(new BigDateObject(1, new Date()));
+        try {
+            if (Integer.parseInt(id) % 2 == 0) {
+                throw new RuntimeException("非法id:" + id);
+            }
+        } catch (Exception e) {
+            logger.error("参数非法", e);
+        }
         return System.currentTimeMillis() + "," + id;
     }
 
