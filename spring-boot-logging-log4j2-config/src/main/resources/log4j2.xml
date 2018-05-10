@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" strict="false">
+
+    <Properties>
+        <Property name="local.logging.path">C:/logs</Property>
+        <Property name="project.name">spring-boot-logging-log4j2-config</Property>
+        <Property name="layout">%d %p [%t] %c{1.}:%M:%L %X{orderId,groupId} %m%n</Property>
+
+        <Property name="logging.file.path">${local.logging.path}/${sys:project.name}</Property>
+        <Property name="logging.file.action.name">${sys:logging.file.path}/../bigdata/${sys:project.name}-action.log</Property>
+        <Property name="logging.file.kafka.name">${sys:logging.file.path}/../bigdata/${sys:project.name}-risk.log</Property>
+        <Property name="logging.file.trace.split.name">${sys:logging.file.path}/../bigdata/dispatch-message-extra.log</Property>
+        <Property name="logging.file.trace.name">${sys:logging.file.path}/../dispatch-message/dispatch-message-trace.log</Property>
+    </Properties>
+
+    <Appenders>
+        <RollingRandomAccessFile name="actionLogFile"
+                                 immediateFlush="true" fileName="${logging.file.action.name}"
+                                 filePattern="${logging.file.action.name}.%d{yyyy-MM-dd}">
+            <PatternLayout pattern="${layout}" />
+            <ThresholdFilter level="debug" />
+            <TimeBasedTriggeringPolicy />
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="traceAppender"
+                                 immediateFlush="true" fileName="${logging.file.trace.name}"
+                                 filePattern="${logging.file.trace.name}.%d{yyyy-MM-dd-HH}">
+            <PatternLayout pattern="%m%n" />
+            <ThresholdFilter level="INFO" />
+            <TimeBasedTriggeringPolicy />
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="traceSplitAppender"
+                                 immediateFlush="true" fileName="${logging.file.trace.split.name}"
+                                 filePattern="${logging.file.trace.split.name}.%d{yyyy-MM-dd-HH}">
+            <PatternLayout pattern="%m%n" />
+            <ThresholdFilter level="INFO" />
+            <TimeBasedTriggeringPolicy />
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="kafkaLogAppender"
+                                 immediateFlush="true" fileName="${logging.file.kafka.name}"
+                                 filePattern="${logging.file.kafka.name}.%d{yyyy-MM-dd}">
+            <PatternLayout pattern="%m%n"/>
+            <ThresholdFilter level="INFO"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingRandomAccessFile>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com.rhwayfun.springboot.logging.log4j2.config.BigdataUtilImpl" level="debug" additivity="false">
+            <AppenderRef ref="actionLogFile" />
+        </Logger>
+
+        <Logger name="kafkaLogger" level="info" additivity="false">
+            <AppenderRef ref="kafkaLogAppender"/>
+        </Logger>
+
+        <Logger name="traceLogger" level="info" additivity="false">
+            <AppenderRef ref="traceAppender"/>
+        </Logger>
+
+        <Logger name="traceSplitLogger" level="info" additivity="false">
+            <AppenderRef ref="traceSplitAppender"/>
+        </Logger>
+    </Loggers>
+</Configuration>
