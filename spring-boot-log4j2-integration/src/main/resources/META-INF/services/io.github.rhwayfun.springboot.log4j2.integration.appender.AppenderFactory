@@ -1,0 +1,4 @@
+io.github.rhwayfun.springboot.log4j2.integration.appender.impl.ConsoleAppenderFactory
+io.github.rhwayfun.springboot.log4j2.integration.appender.impl.InfoAppenderFactory
+io.github.rhwayfun.springboot.log4j2.integration.appender.impl.WarnAppenderFactory
+io.github.rhwayfun.springboot.log4j2.integration.appender.impl.ErrorAppenderFactory
