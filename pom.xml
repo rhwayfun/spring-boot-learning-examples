@@ -60,6 +60,7 @@
         <module>spring-boot-influxdb</module>
         <module>spring-boot-logging-log4j2-config</module>
         <module>spring-boot-log4j2-integration</module>
+        <module>spring-boot-custom-schema</module>
     </modules>
 
 
