@@ -106,7 +106,7 @@
         <sharding-jdbc-old.version>1.5.4.1</sharding-jdbc-old.version>
         <lombok.version>1.16.18</lombok.version>
         <rocketmq.version>4.1.0-incubating</rocketmq.version>
-        <dubbo.version>2.6.0</dubbo.version>
+        <dubbo.version>2.6.9</dubbo.version>
 
         <!-- plugin -->
         <maven.plugin.aspectj.version>1.10</maven.plugin.aspectj.version>
