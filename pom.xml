@@ -84,7 +84,7 @@
         <apache.tomcat.version>8.5.11</apache.tomcat.version>
         <guava.version>21.0</guava.version>
         <lombok.version>1.16.12</lombok.version>
-        <alibaba.fastjson.version>1.2.28</alibaba.fastjson.version>
+        <alibaba.fastjson.version>1.2.83</alibaba.fastjson.version>
         <testng.version>6.8</testng.version>
         <mockito-core.version>2.7.19</mockito-core.version>
         <mockito-all.version>1.9.5</mockito-all.version>
